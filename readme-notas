@@ -1,0 +1,93 @@
+20211029
+Route / que ejecuta vpostman.
+
+- Se descargo el Drivers para conexion a SQL
+
+https://github.com/Microsoft/msphpsql/releases
+
+- se instalo el SQLSRV59.EXE
+
+d:\xampp\php\ext\php_sqlserv.dll
+
+- se incluyo en php.ini 
+
+extension=php_sqlsrv.dll
+
+- en el archivo .env se incluyo
+
+BSQL_CONNECTION=sqlsrv
+DBSQL_HOST=207.248.62.188
+DBSQL_PORT=1433
+DBSQL_DATABASE=gpe2021
+DBSQL_USERNAME=sa
+DBSQL_PASSWORD=Gu4d4Lup317
+
+DBMULTRAN_CONNECTION=multrannl
+DBMULTRAN_HOST=207.248.62.188
+DBMULTRAN_PORT=1433
+DBMULTRAN_DATABASE=MULTRANNL
+DBMULTRAN_USERNAME=sa
+DBMULTRAN_PASSWORD=Gu4d4Lup317
+
+- ..\config\database.php
+
+ 'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DBSQL_HOST', 'localhost'),
+            'port' => env('DBSQL_PORT', '1433'),
+            'database' => env('DBSQL_DATABASE', 'forge'),
+            'username' => env('DBSQL_USERNAME', 'forge'),
+            'password' => env('DBSQL_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
+        'multrannl' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DBMULTRAN_HOST', 'localhost'),
+            'port' => env('DBMULTRAN_PORT', '1433'),
+            'database' => env('DBMULTRAN_DATABASE', 'forge'),
+            'username' => env('DBMULTRAN_USERNAME', 'forge'),
+            'password' => env('DBMULTRAN_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
+
+TransitoController.procesaPago original 
+   if($MontoBoletaDescuento[$Bol] > 0 && date("Y-m-d") <= date("Y-m-d", strtotime(env('DESCUENTO_FECHA'))))
+                            {
+                                dump("===================================================");
+                                dump("linea 350 pregunta por descuento de fecha ");
+                               // $bonImporte = $bonImporte + round(($MontoBoletaTotal[$Bol] * ((int)env('DESCUENTO_MULTAS')/100)),2);
+                               // $MontoBoletaTotal[$Bol] = $MontoBoletaTotal[$Bol] - round(($MontoBoletaTotal[$Bol] * ((int)env('DESCUENTO_MULTAS')/100)),2);
+                               //$bonImporte = $bonImporte + round(($MontoBoletaTotal[$Bol] * (((int)env('DESCUENTO_MULTAS')/100) + .05)),2); //05072021 13:50
+                               //  $MontoBoletaTotal[$Bol] = $MontoBoletaTotal[$Bol] - round(($MontoBoletaTotal[$Bol] * (((int)env('DESCUENTO_MULTAS')/100) + .05)),2); //05072021 13:50
+                                dump("descuento en linea bonImporte 0");
+                                dump($bonImporte); 
+                                //$bonImporte = $bonImporte + ($MontoBoletaTotal[$Bol] * (((int)env('DESCUENTO_MULTAS')/100) + .0)); //20072021 10:04
+                                $bonImporte = $bonImporte + ($MontoBoleta[$Bol] * (((int)env('DESCUENTO_MULTAS')/100) + .0)); //20211123 12:54
+                                 dump("descuento en linea bonImporte 1");
+                                 dump($bonImporte);   
+                                 dump($MontoBoletaTotal[$Bol]);
+                                 $pasito = (((int)env('DESCUENTO_MULTAS')/100) + .00);          
+                                 dump("pasito");   
+                                 dump($pasito);   
+                              
+                                $MontoBoletaTotal[$Bol] = $MontoBoletaTotal[$Bol] - ($MontoBoletaTotal[$Bol] * (((int)env('DESCUENTO_MULTAS')/100) + .0)); //20072021 10:04
+
+                                //$bonImporte = $bonImporte + $MontoBoletaDescuento[$Bol];
+                                //$bonImporte = $bonImporte + $MontoBoletaDescuento[$Bol];
+                                
+                                dump("descuento en linea bonImporte 2");
+                                dump($bonImporte); 
+                                dump("===================================================");  
+                            }
+
+
+PLACA DE EJEMPLO  rj46406
+
+
+transito 20211202  DESCUENTO_FECHA en .env  es 20211230 
+
+
