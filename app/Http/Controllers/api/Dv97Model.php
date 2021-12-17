@@ -7,93 +7,92 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dv97Model extends Model
 {
-    static function fmonto97($monto){
+    static function fmonto97($monto)
+    {
         dump("Dv97Model.fmonto97");
         $suma = 0;
 
         $amonto = str_split($monto);
-        
-        for ($i=0; $i < 9 ; $i++) { 
 
-            
-            $suma += $amonto[$i]  * 7;
-            $suma += $amonto[$i]  * 3;
-            $suma += $amonto[$i]  * 1;
-            $suma += $amonto[$i]  * 7;
-            $suma += $amonto[$i]  * 3;
-            $suma += $amonto[$i]  * 1;
-            $suma += $amonto[$i]  * 7;
-            $suma += $amonto[$i]  * 3;
-            $suma += $amonto[$i]  * 1;
-            
-        }
-       
+        dump($amonto);
+
+
+
+        $suma += $amonto[8]  * 7;
+        $suma += $amonto[7]  * 3;
+        $suma += $amonto[6]  * 1;
+        $suma += $amonto[5]  * 7;
+        $suma += $amonto[4]  * 3;
+        $suma += $amonto[3]  * 1;
+        $suma += $amonto[2]  * 7;
+        $suma += $amonto[1]  * 3;
+        $suma += $amonto[0]  * 1;
+
+
+
         $resto  = $suma % 10;
 
-      
 
-       return $resto;
 
+        return $resto;
     }
 
-    static function fDV97 ($ref1)
+    static function fDV97($ref1)
     {
         $suma = 0;
 
         $amonto = str_split($ref1);
+
+        dump("monto a calcular digito verificador");
         dump($amonto);
 
-        // $i = 18;
+        // $suma += $amonto[16]  * 11;
+        // $suma += $amonto[15]  * 13;
+        // $suma += $amonto[14]  * 17;
+        // $suma += $amonto[13]  * 19;
+        // $suma += $amonto[12]  * 23;
+        // $suma += $amonto[11]  * 11;
+        // $suma += $amonto[10]  * 13;
+        // $suma += $amonto[9]  * 17;
+        // $suma += $amonto[8]  *  19;
+        // $suma += $amonto[7]  * 23;
+        // $suma += $amonto[6]  * 11;
+        // $suma += $amonto[5]  * 17;
+        // $suma += $amonto[4]  * 19;
+        // $suma += $amonto[3]  *  23;
+        // $suma += $amonto[2]  * 11;
+        // $suma += $amonto[1]  *  13;
+        // $suma += $amonto[0]  * 17;
 
-        // // $i = $i--;
-        // $i = $i--;
+        // 
 
-        // dump("i iiiiiiiiiiiiiiiiiiiiiiiiii");
-        // dump($i);
+        $suma += $amonto[16]  * 11;
+        $suma += $amonto[15]  * 13;
+        $suma += $amonto[14]  * 17;
+        $suma += $amonto[13]  * 19;
+        $suma += $amonto[12]  * 23;
+        $suma += $amonto[11]  * 11;
+        $suma += $amonto[10]  * 13;
+        $suma += $amonto[9]  * 17;
+        $suma += $amonto[8]  *  19;
+        $suma += $amonto[7]  * 23;
+        $suma += $amonto[6]  * 11;
+        $suma += $amonto[5]  * 13;
+        $suma += $amonto[4]  * 17;
+        $suma += $amonto[3]  *  19;
+        $suma += $amonto[2]  * 23;
+        $suma += $amonto[1]  *  11;
+        $suma += $amonto[0]  * 13;
 
-        // $i = $i--;
 
-        // dump("i iiiiiiiiiiiiiiiiiiiiiiiiii");
-        // dump($i);
 
-         
-        
-        for ($i = 16 ; $i  > 0 ; --$i) { 
 
-            dump($i);
 
-            dump ($amonto[$i]);
-            
-            
-            $suma += $amonto[15]  * 11;
-            $suma += $amonto[14]  * 13;
-            $suma += $amonto[13]  * 17;
-            $suma += $amonto[12]  * 19;
-            $suma += $amonto[11]  * 23;
-            $suma += $amonto[10]  * 11;
-            $suma += $amonto[9]  * 13;
-            $suma += $amonto[8]  *  17;
-            $suma += $amonto[7]  * 19;
-            $suma += $amonto[6]  * 23;
-            $suma += $amonto[5]  * 11;
-            $suma += $amonto[4]  * 13;
-            $suma += $amonto[3]  * 17;
-            $suma += $amonto[2]  * 19;
-            $suma += $amonto[1]  * 23;
-            $suma += $amonto[0]  * 11;
 
-             dump($suma);
- 
-        }
-       
-        dump($suma);
+        $resto  = ($suma % 97) + 1;
 
-        $resto  = ($suma % 97) + 1 ;
 
-        
 
-       return $resto;
+        return $resto;
     }
-    
-    
 }
