@@ -47,33 +47,26 @@ class Dv97Model extends Model
         dump($amonto);
 
         
-
-        $suma += $amonto[16]  * 11;
-        $suma += $amonto[15]  * 13;
-        $suma += $amonto[14]  * 17;
-        $suma += $amonto[13]  * 19;
-        $suma += $amonto[12]  * 23;
-        $suma += $amonto[11]  * 11;
-        $suma += $amonto[10]  * 13;
-        $suma += $amonto[9]  * 17;
-        $suma += $amonto[8]  *  19;
-        $suma += $amonto[7]  * 23;
-        $suma += $amonto[6]  * 11;
-        $suma += $amonto[5]  * 13;
-        $suma += $amonto[4]  * 17;
-        $suma += $amonto[3]  *  19;
-        $suma += $amonto[2]  * 23;
-        $suma += $amonto[1]  *  11;
-        $suma += $amonto[0]  * 13;
-
-
-
-
-
+        $suma += $amonto[17]  * 11;
+        $suma += $amonto[16]  * 13;
+        $suma += $amonto[15]  * 17;
+        $suma += $amonto[14]  * 19;
+        $suma += $amonto[13]  * 23;
+        $suma += $amonto[12]  * 11;
+        $suma += $amonto[11]  * 13;
+        $suma += $amonto[10]  * 17;
+        $suma += $amonto[9]  * 19;
+        $suma += $amonto[8]  *  23;
+        $suma += $amonto[7]  * 11;
+        $suma += $amonto[6]  * 13;
+        $suma += $amonto[5]  * 17;
+        $suma += $amonto[4]  * 19;
+        $suma += $amonto[3]  *  23;
+        $suma += $amonto[2]  * 11;
+        $suma += $amonto[1]  *  13;
+        $suma += $amonto[0]  * 17;
 
         $resto  = ($suma % 97) + 1;
-
-
 
         return $resto;
     }

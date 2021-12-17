@@ -12,9 +12,12 @@ class Dv97mController extends Controller
   function fpaso0()
   {
 
-    $cexp  = '01001012';
-    $monto = 4420.90;
-    $cfecha = '20220131';
+    // $cexp  = '01001012';
+    // $monto = 4420.90;
+    // $cfecha = '20220131';
+      $cexp = '923548223051';
+      $monto = '898353.95';
+      $cfecha = '20220330';
 
    
     $monto = number_format($monto, 2);
@@ -35,17 +38,7 @@ class Dv97mController extends Controller
     $monto = str_replace(".", "", $monto);
     $monto = str_pad($monto, 9, "0", STR_PAD_LEFT);
 
-    //$ref1 = $issuer.$expediente.$fecha.$monto;
-
-    //$digitoverificador = new DV();
-
-    //$cv1 = generar_dv($ref1);
-    // $referencia = $ref1.$cv1;
-
-    // $montoreal = number_format($_POST["monto"],2);
-    // $montoreal = str_replace(",", "", $montoreal);
-    // $arm = explode(".", $montoreal);
-
+    
 
     $rexp =  str_pad($cexp, 11, "0", STR_PAD_LEFT);
 
