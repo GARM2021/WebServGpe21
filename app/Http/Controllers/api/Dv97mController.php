@@ -15,7 +15,7 @@ class Dv97mController extends Controller
     // $cexp  = '01001012';
     // $monto = 4420.90;
     // $cfecha = '20220131';
-      $cexp = '923548223051';
+      $cexp = '23548223051';
       $monto = '898353.95';
       $cfecha = '20220330';
 
