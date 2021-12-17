@@ -14,6 +14,7 @@ class Dv97Model extends Model
         $amonto = str_split($monto);
         
         for ($i=0; $i < 9 ; $i++) { 
+
             
             $suma += $amonto[$i]  * 7;
             $suma += $amonto[$i]  * 3;
@@ -40,29 +41,53 @@ class Dv97Model extends Model
         $suma = 0;
 
         $amonto = str_split($ref1);
+        dump($amonto);
+
+        // $i = 18;
+
+        // // $i = $i--;
+        // $i = $i--;
+
+        // dump("i iiiiiiiiiiiiiiiiiiiiiiiiii");
+        // dump($i);
+
+        // $i = $i--;
+
+        // dump("i iiiiiiiiiiiiiiiiiiiiiiiiii");
+        // dump($i);
+
+         
         
-        for ($i=0; $i < 17 ; $i++) { 
+        for ($i = 16 ; $i  > 0 ; --$i) { 
+
+            dump($i);
+
+            dump ($amonto[$i]);
             
-            $suma += $amonto[$i]  * 11;
-            $suma += $amonto[$i]  * 13;
-            $suma += $amonto[$i]  * 17;
-            $suma += $amonto[$i]  * 19;
-            $suma += $amonto[$i]  * 23;
-            $suma += $amonto[$i]  * 11;
-            $suma += $amonto[$i]  * 13;
-            $suma += $amonto[$i]  * 17;
-            $suma += $amonto[$i]  * 19;
-            $suma += $amonto[$i]  * 23;
-            $suma += $amonto[$i]  * 11;
-            $suma += $amonto[$i]  * 13;
-            $suma += $amonto[$i]  * 17;
-            $suma += $amonto[$i]  * 19;
-            $suma += $amonto[$i]  * 23;
-            $suma += $amonto[$i]  * 11;
-            $suma += $amonto[$i]  * 13;
+            
+            $suma += $amonto[15]  * 11;
+            $suma += $amonto[14]  * 13;
+            $suma += $amonto[13]  * 17;
+            $suma += $amonto[12]  * 19;
+            $suma += $amonto[11]  * 23;
+            $suma += $amonto[10]  * 11;
+            $suma += $amonto[9]  * 13;
+            $suma += $amonto[8]  *  17;
+            $suma += $amonto[7]  * 19;
+            $suma += $amonto[6]  * 23;
+            $suma += $amonto[5]  * 11;
+            $suma += $amonto[4]  * 13;
+            $suma += $amonto[3]  * 17;
+            $suma += $amonto[2]  * 19;
+            $suma += $amonto[1]  * 23;
+            $suma += $amonto[0]  * 11;
+
+             dump($suma);
  
         }
        
+        dump($suma);
+
         $resto  = ($suma % 97) + 1 ;
 
         
