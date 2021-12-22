@@ -15,11 +15,11 @@ class Dv97mController extends Controller
     // $cexp  = '01001012';
     // $monto = 4420.90;
     // $cfecha = '20220131';
-      $cexp = '23548223051';
-      $monto = '898353.95';
-      $cfecha = '20220330';
+    $cexp = '23548223051';
+    $monto = '898353.95';
+    $cfecha = '20220330';
 
-   
+
     $monto = number_format($monto, 2);
     // dd($monto);
     $monto = str_replace(",", "", $monto);
@@ -38,7 +38,7 @@ class Dv97mController extends Controller
     $monto = str_replace(".", "", $monto);
     $monto = str_pad($monto, 9, "0", STR_PAD_LEFT);
 
-    
+
 
     $rexp =  str_pad($cexp, 11, "0", STR_PAD_LEFT);
 
@@ -48,10 +48,10 @@ class Dv97mController extends Controller
     $cmes  = substr($cfecha, 4, 2);
     $cdia  = substr($cfecha, 6, 2);
 
-    
+
 
     $cfecha = (($cyear - 2013) * 372) + (($cmes - 1) * 31) + ($cdia - 1);
-     
+
     $mfecha = str_pad($cfecha, 4, "0", STR_PAD_LEFT);
 
     dump($cyear);
@@ -59,9 +59,9 @@ class Dv97mController extends Controller
     dump($cdia);
 
     dump($rexp);
-   
+
     dump($mfecha);
-   
+
 
     dump($monto);
 
@@ -79,7 +79,5 @@ class Dv97mController extends Controller
 
 
     dump($ref1);
-
-
   }
 }

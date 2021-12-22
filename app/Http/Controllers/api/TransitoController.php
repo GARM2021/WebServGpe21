@@ -301,6 +301,8 @@ class TransitoController extends Controller
                         dump("TransitoController->TransitoModel getDescuentoDetalle >>>>>>>>>>>>>>>");
                         $descuentoA = TransitoModel::getDescuentoDetalle($rowDetalles->mun, $rowDetalles->clave, $fechaInfraccion);
                         $descuento = $descuentoA["descuento"];
+                        dump("descuentoA");
+                        dump($descuentoA); 
                         dump("descuento retornado");
                         dump($descuento);
                         dump("monto");
@@ -311,7 +313,7 @@ class TransitoController extends Controller
                         // 20211126  
                         if ($descuento > 0  && date("Y-m-d") <= date("Y-m-d", strtotime(env('DESCUENTO_FECHA')))) {
 
-                            $descuento = $descuento + .05;
+                            $descuento = $descuento + 5;
                 
                         } 
 
@@ -319,6 +321,8 @@ class TransitoController extends Controller
 
 
                         $MontoDescuento = round($rowDetalles->monto * ($descuento / 100), 2);
+                        dump("MontoDescuento<<<<<<<<<<<<<<<<<<");
+                        dump($MontoDescuento);
                         $boleta = trim($rowDetalles->boleta);
                         if (!in_array($boleta, $Boletas)) {
                             $Boletas[] = $boleta;
@@ -353,7 +357,8 @@ class TransitoController extends Controller
                         ];
 
                     }
-                    
+                    dump("Boletas");
+                    dump($Boletas);
                     foreach ($Boletas as $Bol) {
                         if (@$MontoBoleta[$Bol] != "") {
                              dump("tipoDescuentoBoleta 202112092021120920211209202112092021120920211209");
@@ -363,7 +368,8 @@ class TransitoController extends Controller
                             if(@$tipoDescuentoBoleta[$boleta] == "descpp")
                             {
                                 $bonImporte = 0;
-                                $descPp = $MontoBoletaDescuento[$Bol];
+                                $descPp = $descPp + $MontoBoletaDescuento[$Bol];
+                                $MontoBoletaDescuento[$Bol] = 0;
                             }
                             dump("linea 347 pregunta por descuento de fecha ");
                             dump($tipoDescuentoBoleta[$boleta]);
@@ -432,6 +438,7 @@ class TransitoController extends Controller
                              $bonImporte = round($bonImporte,2);                         //20072021 10:04
                              dump("round bonImporte 3");
                              dump($bonImporte); 
+                             dump($MontoDescuento);
                             
                             $datosIngreso = [];
                             $datosIngreso["fecha"] = date("Ymd", strtotime($fechaHoy));
@@ -446,7 +453,9 @@ class TransitoController extends Controller
                             $datosIngreso["concepto_4"] = "";
                             $datosIngreso["ctaimporte"] = $ctaimporte;
                             $datosIngreso["importe"] = $MontoBoleta[$Bol];
-                            $datosIngreso["bonimporte"] = $bonImporte;
+                            //  $datosIngreso["bonimporte"] = $bonImporte;
+                            // $datosIngreso["bonimporte"] = $MontoDescuento; //20211202 garm
+                             $datosIngreso["bonimporte"] = $MontoBoletaDescuento[$Bol]; //20211202 garm
                             $datosIngreso["ctarecargo"] = $ctarecargo;
                             $datosIngreso["recargos"] = 0;
                             $datosIngreso["bonrecargo"] = 0;
@@ -501,6 +510,8 @@ class TransitoController extends Controller
 
                                 }
                             }
+
+                            $MontoBoletaDescuento[$Bol] = 0; // garm 20211221
 
                         }
 
@@ -557,7 +568,13 @@ class TransitoController extends Controller
 
                 foreach ($descuentosMovs as $dm)
                 {
+                    dump($dm);
+
+                                        
                     $datosUpdateBonif = [$dm["tipoDescuento"] => $dm["descuento"]];
+                   
+                    dump("datosUpdateBonif");
+                    dump($datosUpdateBonif);
 
                     // DB::connection('sqlsrv')
                     //     ->table('transiddetinf')

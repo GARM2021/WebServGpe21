@@ -47,8 +47,8 @@ class Dv97Model extends Model
         dump("monto a calcular digito verificador");
         dump($amonto);
 
-        
-       
+
+
         $suma += $amonto[16]  * 11;
         $suma += $amonto[15]  * 13;
         $suma += $amonto[14]  * 17;

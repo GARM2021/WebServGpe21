@@ -13,7 +13,7 @@ class TransitoModel extends Model
 {
     static function getDescuentoDetalle($mun, $clave, $fechaInfaccion)
     {
-        dump("TransitoModel getDescuentoDetalle <<<<<<<<<<<<<<<<<<");
+        dump(">>>>>>>>>>>>>>>>>>>>>>TransitoModel getDescuentoDetalle <<<<<<<<<<<<<<<<<<");
         dump($clave);
         $descuento = 0;
         $porcentajeBonificacion = 0;
@@ -33,6 +33,12 @@ class TransitoModel extends Model
             ->where('clave', '=', trim($clave))
             ->first();
         if ($queryCuotas) {
+
+            // if (trim($queryCuotas->bonifica == " " ) {
+            //     $queryCuotas->bonifica  ' ' ;
+            // } 
+            
+
             if (trim($queryCuotas->bonifica != 'NO')) {
                 $fechaInfaccion = date('Y-m-d', strtotime($fechaInfaccion));
                 $fechaHoy = date("Y-m-d");
@@ -84,7 +90,7 @@ class TransitoModel extends Model
                     dump($porcentajeDescuentoCuota);
 
 
-                    if($porcentajeBonificacion > $porcentajeDescuentoCuota) //! %Bonificacion es el transimunicipios &DescuentoCuota descuento por pronto pago del transimcuotas
+                    if(($porcentajeBonificacion + 5)  > $porcentajeDescuentoCuota) //! %Bonificacion es el transimunicipios &DescuentoCuota descuento por pronto pago del transimcuotas
                     {
                         $descuento = $porcentajeBonificacion;
                         $tipoDesc = 'bonif';

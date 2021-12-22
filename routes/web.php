@@ -43,7 +43,9 @@ Route::get('/predial', 'api\PredialController@consulta');
 Route::post('/predial/consulta', [App\Http\Controllers\api\PredialController::class, 'cuenta']);
 Route::post('/predial/direccion', 'api\PredialController@direccion');
 Route::post('/predial/imprimir', 'api\PredialController@cuenta_pdf');
-Route::post('/predial/paynet', 'api\PredialPDF@paynet');
+//Route::post('/predial/paynet', 'api\PredialPDF@paynet');
+Route::post('/predial/paynet', [App\Http\Controllers\api\PredialPDF::class, 'paynet']);
+
 Route::post('/predial/oxxo', 'api\PredialPDF@oxxo');
 Route::post('/predial/azteca', 'api\PredialPDF@azteca');
 
