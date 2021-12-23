@@ -11,6 +11,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 class PredialPDF extends Controller
 {
     public function paynet(){
+        //dump("paynet");
         $expediente = @$_POST["expediente"];
         $adeudo = PredialModel::getEstadoCuenta($expediente);
         //print_r($adeudo); die();

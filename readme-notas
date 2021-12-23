@@ -89,5 +89,11 @@ PLACA DE EJEMPLO  rj46406
 
 
 transito 20211202  DESCUENTO_FECHA en .env  es 20211230 
+=============================================================================================================
+20211222
 
+https://github.com/codedge/laravel-fpdf
 
+composer require codedge/laravel-fpdf
+
+php artisan vendor:publish --provider="Codedge\Fpdf\FpdfServiceProvider" --tag=config

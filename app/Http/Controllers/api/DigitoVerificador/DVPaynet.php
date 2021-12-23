@@ -19,8 +19,8 @@ class DVPaynet extends Model
         $suma = 0;
         $needsDoubleValue = !$hasVerificationDigit;
         for ($i = (strlen($ref) - 1); ($i >= 0); --$i) {
-            //$valor = $this->getCharacterValue($ref->charAt($i));
-            $valor = DVPaynet::getCharacterValue($ref{$i});
+            $valor = DVPaynet::getCharacterValue($ref->charAt($i)); //20211222
+            //$valor = DVPaynet::getCharacterValue($ref{$i});
             $suma += DVPaynet::getValueToSum($valor, $needsDoubleValue);
             $needsDoubleValue = !$needsDoubleValue;
         }
