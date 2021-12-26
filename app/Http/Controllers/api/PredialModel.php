@@ -340,6 +340,7 @@ class PredialModel extends Model
                         /* HDT 01/01/2021 se agrega el + 3 que un 3% adicional por pago en linea siempre y cuando el tipo de construccion sea vivienda && el no sea bald��o */
                         /* HDT 22/06/2021 se agrega el + 5 que es un 5% adicional por pago en linea del programa QUE PADRES DESCUENTOS  */
                         $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp + 5)) / 100;    
+                        $bonImpPaso1 =((($rowAdeudos->salimp ) * ($queryBonificacion->pctbonimp + 5)) / 100) - $rowAdeudos->salsub; //GARM 2022 20211226   
                         /*$bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp)) / 100;    */
                     } else {
                         $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * $queryBonificacion->pctbonimp) / 100;
