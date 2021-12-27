@@ -339,11 +339,14 @@ class PredialModel extends Model
                     if($tipoCargo == '002'){
                         /* HDT 01/01/2021 se agrega el + 3 que un 3% adicional por pago en linea siempre y cuando el tipo de construccion sea vivienda && el no sea bald��o */
                         /* HDT 22/06/2021 se agrega el + 5 que es un 5% adicional por pago en linea del programa QUE PADRES DESCUENTOS  */
-                        $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp + 5)) / 100;    
-                        $bonImpPaso1 =((($rowAdeudos->salimp ) * ($queryBonificacion->pctbonimp + 5)) / 100) - $rowAdeudos->salsub; //GARM 2022 20211226   
+                        // GARM 27/12/2021 se cancela el -salsub  para el 2022
+                       // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp + 5)) / 100;  //GARM 2021 hasta el 20211231  
+                        $bonImpPaso1 =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp + 5)) / 100); //!GARM 2022 20211226   
                         /*$bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp)) / 100;    */
                     } else {
-                        $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * $queryBonificacion->pctbonimp) / 100;
+                        // GARM 27/12/2021 se cancela el -salsub  para el 2022
+                       // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * $queryBonificacion->pctbonimp) / 100;
+                        $bonImpPaso1 = ($rowAdeudos->salimp  * $queryBonificacion->pctbonimp) / 100; //!GARM 2022 20211226 
                     }
                     
                     $bonImpPaso2 = $bonImpPaso1 * 10;
@@ -480,7 +483,7 @@ class PredialModel extends Model
                  * TERMINA PASO 3: Calcular Bonificaciones de los recargos
                  */
                 dump("TERMINA PASO 3: Calcular Bonificaciones de los recargos");
-                $neto = (round($rowAdeudos->salimp, 2) + round($recargos, 2)) - (round($bonificacionImp, 2) + round($bonificacionRec, 2) + round($rowAdeudos->salsub, 2));
+                $neto = (round($rowAdeudos->salimp, 2) + round($recargos, 2)) - (round($bonificacionImp, 2) + round($bonificacionRec, 2) + round($rowAdeudos->salsub, 2));//!GARM 2022 20211226 asi queda igual  
                 $totalAdeudo = round($totalAdeudo, 2) + round($neto, 2);
                 dump($neto);
                 dump($totalAdeudo);
@@ -504,8 +507,8 @@ class PredialModel extends Model
                         "descripcion" => @$queryTipoCargo->descripcion,
                         "fechaven" => date("d/m/Y", strtotime($rowAdeudos->fechaven)),
                         "montoimp" => round($rowAdeudos->montoimp, 2),
-                        "salsub" => round($rowAdeudos->salsub, 2),
-                        "saldo" => round($rowAdeudos->salimp, 2) - round($rowAdeudos->salsub, 2),
+                        "salsub" => round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
+                        "saldo" => round($rowAdeudos->salimp, 2) - round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
                         "bonImp" => round($bonificacionImp, 2),
                         "recargos" => round($recargos, 2),
                         "bonRec" => round($bonificacionRec, 2),
