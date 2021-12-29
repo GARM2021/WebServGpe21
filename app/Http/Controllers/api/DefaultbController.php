@@ -392,7 +392,8 @@ class DefaultbController extends Controller
 						//20211130  GARM se incluyo este if  
 						if ($tpocar == '0002') {
 
-							$paso1	  = (($row->salimp - $row->salsub) * ($row2->pctbonimp + 5)) / 100;
+						//	$paso1	  = (($row->salimp - $row->salsub) * ($row2->pctbonimp + 5)) / 100;  // GARM 20211226 sin subsidio
+							$paso1	  = ($row->salimp  * ($row2->pctbonimp + 5)) / 100;  //! GARM 20211226 el subsidio se aplica en la linea 498
 							dump("tpocargo2");
 							dump($paso1);
 						}
@@ -494,7 +495,7 @@ class DefaultbController extends Controller
 
 					//$WNETO			= ($row->salimp+$wrecargos)-($pbonimp+$bonrec+$row->salsub);
 
-					$WNETO			= (round($row->salimp, 2) + round($wrecargos, 2)) - (round($pbonimp, 2) + round($bonrec, 2) + round($row->salsub, 2));
+					$WNETO			= (round($row->salimp, 2) + round($wrecargos, 2)) - (round($pbonimp, 2) + round($bonrec, 2) + round($row->salsub, 2));//! GARM 2022 se queda igual
 					$WimpNETO		= $row->salimp;
 					$WTOTALMIMPORTE	= $WTOTALMIMPORTE + $row->salimp;
 					$WTOTALsalsub	= $WTOTALsalsub + $row->salsub;
@@ -508,7 +509,7 @@ class DefaultbController extends Controller
 					dump($WNETO);
 
 					//DESCUENTO POR PRONTO PAGO Ingresdingresos Descpp
-					$wdescpp 	 = $wdescpp + $row->salsub;
+					$wdescpp 	 = $wdescpp + $row->salsub; //! GARM 20211226  no se movio 
                     dump($wdescpp); 
 
 					if (substr($row->yearbim, 0, 4) == date("Y")) {
@@ -731,7 +732,7 @@ class DefaultbController extends Controller
 				// 		$sql.= "'".'PR'."',"; 
 				// 		$sql.= "'".$wcentro."',"; 
 				// 		$sql.= "'".$Expe."',"; 
-				// 		$sql.= "$wdescpp,"; 
+				// 		$sql.= "$wdescpp,"; //! GARM 20211226 se queda igual guarda el subsidio 
 				// 		$sql.= "'".$wconcepto."',"; 
 				// 		$sql.= "'".$numtc."',"; 
 				// 		$sql.= "'".$noperacion."',";

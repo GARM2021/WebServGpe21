@@ -341,12 +341,12 @@ class PredialModel extends Model
                         /* HDT 22/06/2021 se agrega el + 5 que es un 5% adicional por pago en linea del programa QUE PADRES DESCUENTOS  */
                         // GARM 27/12/2021 se cancela el -salsub  para el 2022
                        // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp + 5)) / 100;  //GARM 2021 hasta el 20211231  
-                        $bonImpPaso1 =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp + 5)) / 100); //!GARM 2022 20211226   
+                        $bonImpPaso1 =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp + 5)) / 100); //!GARM 2022 20211226  el subsidio se aplica en la lina 486
                         /*$bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp)) / 100;    */
                     } else {
                         // GARM 27/12/2021 se cancela el -salsub  para el 2022
                        // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * $queryBonificacion->pctbonimp) / 100;
-                        $bonImpPaso1 = ($rowAdeudos->salimp  * $queryBonificacion->pctbonimp) / 100; //!GARM 2022 20211226 
+                        $bonImpPaso1 = ($rowAdeudos->salimp  * $queryBonificacion->pctbonimp) / 100; //!GARM 2022 20211226  el subsidio se aplica en la linea 486
                     }
                     
                     $bonImpPaso2 = $bonImpPaso1 * 10;
