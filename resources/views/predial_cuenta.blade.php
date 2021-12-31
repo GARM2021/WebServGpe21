@@ -62,9 +62,9 @@
                                             <th>Concepto</th>
                                             <th class="text-center">Fecha</th>
                                             <th class="text-right">Importe</th>
-                                            <th class="text-right">Subsidio</th>
                                             <th class="text-right">Saldo</th>
                                             <th class="text-right">Bon. Imp.</th>
+                                            <th class="text-right">Subsidio</th>
                                             <th class="text-right">Recargos</th>
                                             <th class="text-right">Bon. Rec.</th>
                                             <th class="text-right">Neto a Pagar</th>
@@ -95,9 +95,9 @@
                                                 <td>{{ $rowAdeudo["descripcion"] }}</td>
                                                 <td class="text-center">{{ $rowAdeudo["fechaven"] }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["montoimp"],2) }}</td>
-                                                <td class="text-right">{{ number_format($rowAdeudo["salsub"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["saldo"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["bonImp"],2) }}</td>
+                                                <td class="text-right">{{ number_format($rowAdeudo["salsub"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["recargos"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["bonRec"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["neto"],2) }}</td>
@@ -109,9 +109,9 @@
                                             <tr>
                                                 <th colspan="3" class="text-right">Totales</th>
                                                 <th class="text-right">{{ number_format($total1,2) }}</th>
-                                                <th class="text-right">{{ number_format($total2,2) }}</th>
                                                 <th class="text-right">{{ number_format($total3,2) }}</th>
                                                 <th class="text-right">{{ number_format($total4,2) }}</th>
+                                                <th class="text-right">{{ number_format($total2,2) }}</th>
                                                 <th class="text-right">{{ number_format($total5,2) }}</th>
                                                 <th class="text-right">{{ number_format($total6,2) }}</th>
                                                 <th class="text-right">{{ number_format($total7,2) }}</th>

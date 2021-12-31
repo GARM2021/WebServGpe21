@@ -97,3 +97,27 @@ https://github.com/codedge/laravel-fpdf
 composer require codedge/laravel-fpdf
 
 php artisan vendor:publish --provider="Codedge\Fpdf\FpdfServiceProvider" --tag=config
+
+=============================================================================================================
+20211230
+
+predial_cuenta.blade.php   debera ir importe saldo (solo se cambiara saldo ) thead th saldo, td saldo, tfoot th total3 
+ORIGINAL --> Año Bim	Concepto	Fecha	Importe	Subsidio	Saldo	Bon Imp	Recargos	Bon. Rec.	Neto a Pagar
+                                            <th class="text-center">Año Bim</th>
+                                            <th>Concepto</th>
+                                            <th class="text-center">Fecha</th>
+                                            <th class="text-right">Importe</th>
+                                            <th class="text-right">Subsidio</th>
+                                            <th class="text-right">Saldo</th>
+                                            <th class="text-right">Bon. Imp.</th>
+                                            <th class="text-right">Recargos</th>
+                                            <th class="text-right">Bon. Rec.</th>
+                                            <th class="text-right">Neto a Pagar</th>
+
+SUBSIDIO22 -->Año Bim	Concepto	Fecha	Importe	Saldo	Bon Imp	Subsidio	Recargos	Bon. Rec.	Neto a Pagar
+
+PredialController.php->cuenta_pdf()  Se incluyo la NOTA del subsidio linea 496 pendiente para hacer pruebas
+
+predial_cuenta.blade.php GARM 30122021 se incluyo la nota.
+
+PredialModel.php  GARM 30122021 se modifico para calculo del Subsidio 2022
