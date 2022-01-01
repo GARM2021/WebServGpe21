@@ -6,6 +6,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\api\DigitoVerificador\DVOxxo;
 use App\Http\Controllers\api\DigitoVerificador\DVPaynet;
 use Barryvdh\Debugbar\Twig\Extension\Dump;
+use Illuminate\Database\Console\DumpCommand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Luecano\NumeroALetras\NumeroALetras;
@@ -87,9 +88,11 @@ class PredialModel extends Model
         }
 
         if (trim($queryMarca->paga) == 'NO' || trim($queryMarca->paga) == '') {
+            dump("MARCA ====== NO ");
             return false;
         }
-
+        
+        dump("salgo de getexpediente marca");
         return true;
     }
 
@@ -508,7 +511,8 @@ class PredialModel extends Model
                         "fechaven" => date("d/m/Y", strtotime($rowAdeudos->fechaven)),
                         "montoimp" => round($rowAdeudos->montoimp, 2),
                         "salsub" => round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
-                        "saldo" => round($rowAdeudos->salimp, 2) - round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
+                        //"saldo" => round($rowAdeudos->salimp, 2) - round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
+                        "saldo" => round($rowAdeudos->salimp, 2), //!GARM 2022 20211226  queda igual
                         "bonImp" => round($bonificacionImp, 2),
                         "recargos" => round($recargos, 2),
                         "bonRec" => round($bonificacionRec, 2),
