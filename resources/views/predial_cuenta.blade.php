@@ -85,10 +85,21 @@
                                                 $total1 += round($rowAdeudo["montoimp"],2);
                                                 $total2 += round($rowAdeudo["salsub"],2);
                                                 $total3 += round($rowAdeudo["saldo"],2);
-                                                $total4 += round($rowAdeudo["bonImp"],2);
+                                                // $bonImp5 = $rowAdeudo["saldo"]*.15;
+                                                // $total4 += $bonImp5;
+                                               // $total4 += round($rowAdeudo["bonImp"],2);
+                                                $total4 += round($rowAdeudo["bonImpI"],2);
+
+                                               
                                                 $total5 += round($rowAdeudo["recargos"],2);
                                                 $total6 += round($rowAdeudo["bonRec"],2);
-                                                $total7 += round($rowAdeudo["neto"],2);
+                                                // $bonImpN5 = round($rowAdeudo["saldo"],2) - round($rowAdeudo["salsub"],2) - $bonImp5  + round($rowAdeudo["recargos"],2) - round($rowAdeudo["bonRec"],2);
+
+                                                // $total7 += $bonImpN5;
+                                               // $total7 += round($rowAdeudo["neto"],2);
+                                                $total7 += round($rowAdeudo["netoI"],2);
+
+                                               
                                             @endphp
                                             <tr>
                                                 <td class="text-center">{{ $rowAdeudo["yearbim"] }}</td>
@@ -96,11 +107,17 @@
                                                 <td class="text-center">{{ $rowAdeudo["fechaven"] }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["montoimp"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["saldo"],2) }}</td>
-                                                <td class="text-right">{{ number_format($rowAdeudo["bonImp"],2) }}</td>
+                                                 {{-- <td class="text-right">{{ number_format($rowAdeudo["bonImp"],2) }}</td> --}}
+                                                 <td class="text-right">{{ number_format($rowAdeudo["bonImpI"],2) }}</td>
+                                                 {{-- <td class="text-right">{{$bonImp5}}</td> --}}
+                                                 
                                                 <td class="text-right">{{ number_format($rowAdeudo["salsub"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["recargos"],2) }}</td>
                                                 <td class="text-right">{{ number_format($rowAdeudo["bonRec"],2) }}</td>
-                                                <td class="text-right">{{ number_format($rowAdeudo["neto"],2) }}</td>
+                                                {{-- <td class="text-right">{{ number_format($rowAdeudo["neto"],2) }}</td> --}}
+                                                <td class="text-right">{{ number_format($rowAdeudo["netoI"],2) }}</td>
+                                                {{-- <td class="text-right">{{$bonImpN5}}</td> --}}
+                                                {{-- <td class="text-right">{{$bonImpN5}}</td> --}}
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -116,6 +133,7 @@
                                                 <th class="text-right">{{ number_format($total6,2) }}</th>
                                                 <th class="text-right">{{ number_format($total7,2) }}</th>
                                             </tr>
+                                          
                                             </tfoot>
                                         @endif
                                     </table>
@@ -126,6 +144,7 @@
                                 @if($cuenta->bonEnero > 0)
                                     @php
                                         $totalLetra = "TOTAL";
+                                        $totalLetraBonLin = "DESCUENTO PAGO EN LINEA ";
                                         /*$total = round($total7 - $cuenta->bonEnero,2);*/
                                         $total = round($total7,2);
                                     @endphp
@@ -136,14 +155,31 @@
                                 @endif
                                 <table class="table table-striped">
                                     <tr>
-                                        <th class="text-right">{{ $totalLetra }}</th>
-                                        <th class="text-right" style="width: 120px;">${{ number_format($total7,2) }}</th>
+                                        <th colspan="3" class="text-right"></th>
+                                        
+                                                                            
+                                        <th  class="text-right">DESCUENTO PAGO EN LINEA</th>
+                                        <th  class="text-right" >${{ number_format($rowAdeudo["tbonlinea"],2) }}</th>
                                     </tr>
+                                    <tr>
+                                        <th colspan="3" class="text-right"></th>
+                                       
+                                       
+                                        <th   class="text-right">TOTAL A PAGAR</th>
+                                        {{-- <th class="text-right" style="width: 120px;">${{ number_format($total7,2) }}</th> --}}
+                                        <th  class="text-right" >${{ number_format($rowAdeudo["totalAdeudo"],2) }}</th>
+
+                                    </tr>
+                                   
                                     <tr>
                                         <!--th colspan="2" class="text-right">
                                         HDT: se comentan los descuentos (esta nota debera eliminarse, fecha de modificacion abril 2021
                                             NOTA: EL TOTAL A PAGAR INCLUYE EL 10% ADICIONAL PARA LAS PERSONAS QUE CUMPLIERON CON EL PAGO DEL IMPUESTO PREDIAL 2020 Y ANTERIORES HASTA EL 31 DE DICIEMBRE 2020. Y UN 3% ADICIONAL AL PAGAR EN VENTANILLA VIRTUAL O TIENDA DE CONVENIENCIA.
                                         </th-->
+                                        <th colspan="2" class="text-right">
+                                            NOTA: SE APLICA  UN DESCUENTO DEL (15% ENERO, 10% FEBRERO Y 5% MARZO), ADICIONAL UN SUBSIDIO DEL  10% SOBRE EL INCREMENTO DEL IMPUESTO PREDIAL.
+                                        </th>
+
                                     </tr>
                                     {{--
                                     @if($cuenta->bonEnero > 0)
@@ -225,7 +261,7 @@
                             <input type="hidden" name="c_referencia" value="{{ trim($info->exp) }}">
                             <input type="hidden" name="val_1" value="0">
                             <input type="hidden" name="t_servicio" value="002">
-                            <input type="hidden" name="t_importe" value="<?php echo number_format(@$total, 2, '.', '')?>">
+                            <input type="hidden" name="t_importe" value="<?php echo number_format(@$rowAdeudo["totalAdeudo"], 2, '.', '')?>">
                             <input type="hidden" name="val_2" value="****** ******* ****">
                             <input type="hidden" name="val_3" value="1">
                             <input type="hidden" name="val_4" value="1">

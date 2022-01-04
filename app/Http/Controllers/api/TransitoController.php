@@ -177,6 +177,7 @@ class TransitoController extends Controller
             // }                                    //20211101
             // dump("TransitoController > TransitoModel getPlacas >>>>>>>>>>>>");
              $placas = TransitoModel::getPlacas($placa);
+             dump("regresa getPlacas");
 
             // switch ($folioWWW->servicio)
             // {
@@ -370,6 +371,12 @@ class TransitoController extends Controller
                                 $bonImporte = 0;
                                 $descPp = $descPp + $MontoBoletaDescuento[$Bol];
                                 $MontoBoletaDescuento[$Bol] = 0;
+                            }
+                            if(@$tipoDescuentoBoleta[$boleta] == "bonif") // 20220101 GARM Se incluyo el if 
+                            {
+                                $bonImporte = $bonImporte + + $MontoBoletaDescuento[$Bol];
+                                $descPp = 0;
+                               
                             }
                             dump("linea 347 pregunta por descuento de fecha ");
                             dump($tipoDescuentoBoleta[$boleta]);

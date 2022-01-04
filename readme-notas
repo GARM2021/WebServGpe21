@@ -121,3 +121,15 @@ PredialController.php->cuenta_pdf()  Se incluyo la NOTA del subsidio linea 496 p
 predial_cuenta.blade.php GARM 30122021 se incluyo la nota.
 
 PredialModel.php  GARM 30122021 se modifico para calculo del Subsidio 2022
+ ==========================================================================================================
+2022/01/01
+
+TransitoController.php  cuando es bonificado y descpp pone el mismo valor en ambos.
+
+                          if(@$tipoDescuentoBoleta[$boleta] == "bonif") // GARM 20220101  evitar que se grave importe en descpp y bonimporte  
+                            {
+                                $bonImporte = $bonImporte +  $MontoBoletaDescuento[$Bol];
+                                $descPp = 0;
+                               
+                            }
+ ==========================================================================================================

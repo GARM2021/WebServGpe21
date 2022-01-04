@@ -144,6 +144,7 @@ class TransitoModel extends Model
         {
             $placas[] = $placa;
         }
+        dump($placas);
         dump('TransitoModel get placas');
         return $placas;
     }

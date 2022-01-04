@@ -217,6 +217,9 @@ class PredialModel extends Model
         $mun = 28; // Municipio de Guadalupe, N.L.
         $totalAdeudo = 0;
         $totalImpuesto = 0;
+        $totalImpuestoI = 0;//!GARM 20220102 solo impresion
+        $totalAdeudoI = 0;//!GARM 20220102 solo impresion
+        $bonificacionLineaImp = 0; //20211202 GARM para acumular la bonificacion en linea y presentarla en el estado de cuenta impreso
         $bonEnero = 0;
         $Adeudos = [];
         $yearBimOrder = "";
@@ -268,7 +271,7 @@ class PredialModel extends Model
                 $recargos = 0;
                 $fechaVencimiento = trim($rowAdeudos->fechaven);
                 $bonificacionImp = 0;
-                $bonificacionLineaImp = 0; //20211202 GARM para acumular la bonificacion en linea y presentarla en el estado de cuenta impreso
+              
                 $bonificacionRec = 0;
                 $tipoCargo = trim($rowAdeudos->tpocar);
 
@@ -344,13 +347,27 @@ class PredialModel extends Model
                         /* HDT 22/06/2021 se agrega el + 5 que es un 5% adicional por pago en linea del programa QUE PADRES DESCUENTOS  */
                         // GARM 27/12/2021 se cancela el -salsub  para el 2022
                        // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp + 5)) / 100;  //GARM 2021 hasta el 20211231  
-                        $bonImpPaso1 =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp + 5)) / 100); //!GARM 2022 20211226  el subsidio se aplica en la lina 486
+                        
+                       $bonImpPaso1I =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp )) / 100); //!GARM 20220102 Se incluye solo para impresion
+                       $bonImpPaso1 =(($rowAdeudos->salimp  * ($queryBonificacion->pctbonimp + 5)) / 100); //!GARM 2022 20211226  el subsidio se aplica en la lina 486
+                        
+                     
+                       $bonificacionLineaImp +=  $rowAdeudos->salimp * 0.05;  //!GARM 20220102 Se incluye solo para impresion
+
+
+
                         /*$bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * ($queryBonificacion->pctbonimp)) / 100;    */
                     } else {
                         // GARM 27/12/2021 se cancela el -salsub  para el 2022
                        // $bonImpPaso1 = (($rowAdeudos->salimp - $rowAdeudos->salsub) * $queryBonificacion->pctbonimp) / 100;
+                        $bonImpPaso1I = ($rowAdeudos->salimp  * $queryBonificacion->pctbonimp) / 100; //!GARM 20220102 Se incluye solo para impresion
                         $bonImpPaso1 = ($rowAdeudos->salimp  * $queryBonificacion->pctbonimp) / 100; //!GARM 2022 20211226  el subsidio se aplica en la linea 486
+                        
                     }
+
+                    $bonImpPaso2 = $bonImpPaso1I * 10;
+                    $bonImpPaso3 = (int)$bonImpPaso2;
+                    $bonificacionImpI = $bonImpPaso3 / 10;
                     
                     $bonImpPaso2 = $bonImpPaso1 * 10;
                     $bonImpPaso3 = (int)$bonImpPaso2;
@@ -465,8 +482,10 @@ class PredialModel extends Model
 
                 /*******************************************
                  * PASO 3: Calcular Bonificaciones de los recargos
+                 * 
+                
                  */
-
+               
                 $queryBonificacionRecargos = DB::connection($connection)
                     ->table('bondbonpred')
                     ->where('tpocar', '=', $tipoCargo)
@@ -487,9 +506,17 @@ class PredialModel extends Model
                  */
                 dump("TERMINA PASO 3: Calcular Bonificaciones de los recargos");
                 $neto = (round($rowAdeudos->salimp, 2) + round($recargos, 2)) - (round($bonificacionImp, 2) + round($bonificacionRec, 2) + round($rowAdeudos->salsub, 2));//!GARM 2022 20211226 asi queda igual  
+                $netoI = (round($rowAdeudos->salimp, 2) + round($recargos, 2)) - (round($bonificacionImpI, 2) + round($bonificacionRec, 2) + round($rowAdeudos->salsub, 2));//!GARM 20220102 Se incluye solo para impresion 
+                
                 $totalAdeudo = round($totalAdeudo, 2) + round($neto, 2);
+                $totalAdeudoI = round($totalAdeudoI, 2) + round($netoI, 2);//!GARM 20220102 Se incluye solo para impresion
+                
+                $bonificacionLineaImp =  $totalAdeudoI - $totalAdeudo ;//!GARM 20220102 Se incluye solo para impresion
                 dump($neto);
+                dump($netoI);
                 dump($totalAdeudo);
+                dump($totalAdeudoI);
+               
 
 
                 /*******************************************
@@ -498,7 +525,7 @@ class PredialModel extends Model
 
                 if ($rowAdeudos->salimp > 0 && substr($yearBim, 0, 4) == date("Y")) {
                     $totalImpuesto += $neto;
-                }
+                 }
 
                 /*******************************************
                  * TERMINA PASO 4: Calcular 3% extra de bonificación en enero, en pago en linea
@@ -514,10 +541,13 @@ class PredialModel extends Model
                         //"saldo" => round($rowAdeudos->salimp, 2) - round($rowAdeudos->salsub, 2), //!GARM 2022 20211226  queda igual
                         "saldo" => round($rowAdeudos->salimp, 2), //!GARM 2022 20211226  queda igual
                         "bonImp" => round($bonificacionImp, 2),
+                        "bonImpI" => round($bonificacionImpI, 2), //!GARM 20220102 Se incluye solo para impresion
                         "recargos" => round($recargos, 2),
                         "bonRec" => round($bonificacionRec, 2),
                         "neto" => $neto,
-                        "tbonlinea" => $bonificacionLineaImp, // 20211202 garm 
+                        "netoI" => $netoI,//!GARM 20220102 Se incluye solo para impresion
+                        "tbonlinea" => $bonificacionLineaImp, // 20211202 garm //!GARM 20220102 Se incluye solo para impresion
+                        "totalAdeudo" => $totalAdeudo, //!GARM 20220102 Se incluye solo para impresion
                     ];
                 }
 
