@@ -334,179 +334,218 @@ class PredialController extends Controller
 
         $cuenta = PredialModel::getEstadoCuenta($expendiente);
 
-        // $pdf = new Fpdf('P', 'cm', 'Letter');
-        // $pdf->SetAutoPageBreak(false);
-        // $pdf->AddPage();
-        // $pdf->SetFont('Arial', 'B', 12);
-        // $y = 1;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(19.5, 0.5, 'Municipio de Guadalupe, N.L.', 0);
-        // //dd($_SERVER);
-        // if (is_file($_SERVER["DOCUMENT_ROOT"] . '/logo-gpe.png')) {
-        //     $pdf->Image($_SERVER["DOCUMENT_ROOT"] . '/logo-gpe.png', 16, 1, 4.2);
+        $pdf = new Fpdf('P', 'cm', 'Letter');
+        $pdf->SetAutoPageBreak(false);
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 12);
+        $y = 1;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(19.5, 0.5, 'Municipio de Guadalupe, N.L.', 0);
+        //dd($_SERVER);
+        if (is_file($_SERVER["DOCUMENT_ROOT"] . '/logo-gpe.png')) {
+            $pdf->Image($_SERVER["DOCUMENT_ROOT"] . '/logo-gpe.png', 16, 1, 4.2);
+        }
+
+        $y += 1;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(19.5, 0.5, utf8_decode('Secretaria de Finanzas y Tesorería Municipal'), 0);
+
+        $y += 0.5;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(19.5, 0.5, utf8_decode('Dirección de Ingresos y Recaudación Inmobiliaria'), 0);
+
+        $y += 1;
+        $pdf->SetFont('Arial', '', 11);
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(9.75, 0.5, 'Datos del Expediente', 0);
+
+        $pdf->SetXY(10.75, $y);
+        $pdf->Cell(9.75, 0.5, 'Fecha: ' . $fecha, 0, 0, 'R');
+
+
+        $y += 0.7;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(2.2, 0.8, utf8_decode('Domicilio: '), $borde, 0);
+        $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->domubi), $borde, 0);
+
+        $y += 0.8;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(2.2, 0.8, utf8_decode('Colonia: '), $borde, 0);
+        $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->colubi), $borde, 0);
+
+        $y += 0.8;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(2.2, 0.8, utf8_decode('Expediente: '), $borde, 0);
+        $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->exp), $borde, 0);
+
+        $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["salsub"],2), $borde, 0, 'R');
+
+        $y += 0.8;
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(2.2, 0.8, utf8_decode('Valor Catastral: '), $borde, 0);
+        $pdf->Cell(7.55, 0.8, number_format(($predialInfo->valcat),2), $borde, 0);
+
+        $y += 1;
+        $pdf->SetFont('Arial', '', 11);
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(9.75, 0.5, 'Estado de Cuenta', 0);
+
+
+
+        $y += 0.8;
+        $borde = 1;
+        $pdf->SetFont('Arial', '', 9);
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(1.5, 0.8, utf8_decode('Año Bim'), $borde, 0, 'C');
+        $pdf->Cell(4.5, 0.8, utf8_decode('Concepto'), $borde, 0, 'L');
+        $pdf->Cell(2, 0.8, utf8_decode('Fecha'), $borde, 0, 'C');
+        $pdf->Cell(2, 0.8, utf8_decode('Importe'), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.8, utf8_decode('Saldo.'), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.8, utf8_decode('Bon. Imp.'), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.8, utf8_decode('Subsidio'), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.8, utf8_decode('Recargos'), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.8, utf8_decode('Bon. Rec.'), $borde, 0, 'R');
+        $pdf->Cell(2.2, 0.8, utf8_decode('Neto a Pagar'), $borde, 0, 'R');
+
+
+        $total1 = 0;
+        $total2 = 0;
+        $total3 = 0;
+        $total4 = 0;
+        $total5 = 0;
+        $total6 = 0;
+        $total7 = 0;
+        $total8 = 0;
+        $total9 = 0;
+
+        $y += 0.8;
+        $pdf->Line(1, $y, 20.5, $y);
+        //$y += 0.3;
+        $borde = 0;
+        $pdf->SetFont('Arial', '', 8.5);
+        foreach ($cuenta->adeudos as $rowAdeudo) {
+
+            $total1 += round($rowAdeudo["montoimp"],2);
+            $total2 += round($rowAdeudo["salsub"],2);
+            $total3 += round($rowAdeudo["saldo"],2);
+          //  $total4 += round($rowAdeudo["bonImp"],2); //!GARM 20220106 
+            $total4 += round($rowAdeudo["bonImpI"],2);
+            $total5 += round($rowAdeudo["recargos"],2);
+            $total6 += round($rowAdeudo["bonRec"],2);
+           // $total7 += round($rowAdeudo["neto"],2);
+            $total7 += round($rowAdeudo["netoI"],2);
+           // $total8 += round($rowAdeudo["tbonlinea"],2); // 20211202 garm //!GARM 20220106  
+           // $total9 = $total7 + $total8 ; // 20211202 garm  //!GARM 20220106 
+
+            $pdf->SetXY(0.5, $y);
+            $pdf->Cell(1.5, 0.5, $rowAdeudo["yearbim"], $borde, 0, 'C');
+            $pdf->Cell(4.5, 0.5, utf8_decode($rowAdeudo["descripcion"]), $borde, 0, 'L');
+            $pdf->Cell(2, 0.5, $rowAdeudo["fechaven"], $borde, 0, 'C');
+            $pdf->Cell(2, 0.5, number_format($rowAdeudo["montoimp"],2), $borde, 0, 'R');
+            $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["salsub"],2), $borde, 0, 'R');
+            $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["saldo"],2), $borde, 0, 'R'); //!GARM 20220106 
+            $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["bonImpI"],2), $borde, 0, 'R'); //!GARM 20220106 
+            $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["recargos"],2), $borde, 0, 'R');
+            $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["bonRec"],2), $borde, 0, 'R');
+           // $pdf->Cell(2.2, 0.5, number_format($rowAdeudo["neto"],2), $borde, 0, 'R'); //!GARM 20220106 
+            $pdf->Cell(2.2, 0.5, number_format($rowAdeudo["netoI"],2), $borde, 0, 'R'); //!GARM 20220106 
+            $y += 0.5;
+        }
+
+        $borde = 0;
+        $y += 0.2;
+        $pdf->Line(1, $y, 20.5, $y);
+        $y += 0.2;
+        $pdf->SetXY(1, $y);
+        $pdf->SetFont('Arial', 'B', 8.5);
+        $pdf->SetXY(0.5, $y);
+        $pdf->Cell(8, 0.5, 'Totales', $borde, 0, 'R');
+        $pdf->Cell(2, 0.5, number_format($total1,2), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.5, number_format($total3,2), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.5, number_format($total4,2), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.5, number_format($total2,2), $borde, 0, 'R');  //!GARM 20220106 
+        $pdf->Cell(1.6, 0.5, number_format($total5,2), $borde, 0, 'R');
+        $pdf->Cell(1.6, 0.5, number_format($total6,2), $borde, 0, 'R');
+        $pdf->Cell(2.2, 0.5, number_format($total7,2), $borde, 0, 'R');
+
+        $pdf->SetFont('Arial', '', 11);
+        $y += 1;
+
+      
+        
+        
+    //     $totalLetra = "TOTAL A PAGAR EN LINEA";  //!GARM 20220106 
+    //   if($cuenta->bonEnero > 0){
+    //         $totalLetra = "TOTAL";
+    //         $total = round($total7 - $cuenta->bonEnero,2);
+    //     }
+
+        $totalLetra = "TOTAL A PAGAR EN CAJA "; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, $totalLetra. ": $" . number_format($total7,2), $borde, 0, 'R');  //!GARM 20220106 
+
+        $totalLetra = "DESCUENTO PAGO EN LINEA "; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, $totalLetra. ": $" . number_format($rowAdeudo["tbonlinea"],2), $borde, 0, 'R'); //!GARM 20220106 
+
+        $totalLetra = "TOTAL A PAGAR EN LINEA "; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, $totalLetra. ": $" . number_format($rowAdeudo["totalAdeudo"],2), $borde, 0, 'R'); //!GARM 20220106 
+        
+      
+        
+        // if($total8 > 0){
+        //   $pdf->SetFont('Arial', '', 11);  
+        //   $y += 1;
+        //   $totalLetra = "TOTAL A PAGAR EN VENTANILLA ";
+        //   $pdf->SetXY(1, $y);
+        //   $pdf->Cell(19.7, 0.7, $totalLetra. ": $" . number_format($total9,2), $borde, 0, 'R');
         // }
 
-        // $y += 1;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(19.5, 0.5, utf8_decode('Secretaria de Finanzas y Tesorería Municipal'), 0);
-
-        // $y += 0.5;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(19.5, 0.5, utf8_decode('Dirección de Ingresos y Recaudación Inmobiliaria'), 0);
-
-        // $y += 1;
-        // $pdf->SetFont('Arial', '', 11);
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(9.75, 0.5, 'Datos del Expediente', 0);
-
-        // $pdf->SetXY(10.75, $y);
-        // $pdf->Cell(9.75, 0.5, 'Fecha: ' . $fecha, 0, 0, 'R');
-
-
-        // $y += 0.7;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(2.2, 0.8, utf8_decode('Domicilio: '), $borde, 0);
-        // $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->domubi), $borde, 0);
-
-        // $y += 0.8;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(2.2, 0.8, utf8_decode('Colonia: '), $borde, 0);
-        // $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->colubi), $borde, 0);
-
-        // $y += 0.8;
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(2.2, 0.8, utf8_decode('Expediente: '), $borde, 0);
-        // $pdf->Cell(7.55, 0.8, utf8_decode($predialInfo->exp), $borde, 0);
-
-        // $y += 1;
-        // $pdf->SetFont('Arial', '', 11);
-        // $pdf->SetXY(1, $y);
-        // $pdf->Cell(9.75, 0.5, 'Estado de Cuenta', 0);
-
-
-
-        // $y += 0.8;
-        // $borde = 1;
-        // $pdf->SetFont('Arial', '', 9);
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(1.5, 0.8, utf8_decode('Año Bim'), $borde, 0, 'C');
-        // $pdf->Cell(4.5, 0.8, utf8_decode('Concepto'), $borde, 0, 'L');
-        // $pdf->Cell(2, 0.8, utf8_decode('Fecha'), $borde, 0, 'C');
-        // $pdf->Cell(2, 0.8, utf8_decode('Importe'), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.8, utf8_decode('Subsidio'), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.8, utf8_decode('Saldo.'), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.8, utf8_decode('Bon. Imp.'), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.8, utf8_decode('Recargos'), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.8, utf8_decode('Bon. Rec.'), $borde, 0, 'R');
-        // $pdf->Cell(2.2, 0.8, utf8_decode('Neto a Pagar'), $borde, 0, 'R');
-
-
-        // $total1 = 0;
-        // $total2 = 0;
-        // $total3 = 0;
-        // $total4 = 0;
-        // $total5 = 0;
-        // $total6 = 0;
-        // $total7 = 0;
-
-        // $y += 0.8;
-        // $pdf->Line(1, $y, 20.5, $y);
-        // //$y += 0.3;
-        // $borde = 0;
-        // $pdf->SetFont('Arial', '', 8.5);
-        // foreach ($cuenta->adeudos as $rowAdeudo) {
-
-        //     $total1 += round($rowAdeudo["montoimp"],2);
-        //     $total2 += round($rowAdeudo["salsub"],2);
-        //     $total3 += round($rowAdeudo["saldo"],2);
-        //     $total4 += round($rowAdeudo["bonImp"],2);
-        //     $total5 += round($rowAdeudo["recargos"],2);
-        //     $total6 += round($rowAdeudo["bonRec"],2);
-        //     $total7 += round($rowAdeudo["neto"],2);
-            //    $total8 += round($rowAdeudo["tbonlinea"],2); // 20211202 garm 
-            //    $total9 = $total7 + $total8 // 20211202 garm 
-
-
-        //     $pdf->SetXY(0.5, $y);
-        //     $pdf->Cell(1.5, 0.5, $rowAdeudo["yearbim"], $borde, 0, 'C');
-        //     $pdf->Cell(4.5, 0.5, utf8_decode($rowAdeudo["descripcion"]), $borde, 0, 'L');
-        //     $pdf->Cell(2, 0.5, $rowAdeudo["fechaven"], $borde, 0, 'C');
-        //     $pdf->Cell(2, 0.5, number_format($rowAdeudo["montoimp"],2), $borde, 0, 'R');
-        //     $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["salsub"],2), $borde, 0, 'R');
-        //     $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["saldo"],2), $borde, 0, 'R');
-        //     $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["bonImp"],2), $borde, 0, 'R');
-        //     $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["recargos"],2), $borde, 0, 'R');
-        //     $pdf->Cell(1.6, 0.5, number_format($rowAdeudo["bonRec"],2), $borde, 0, 'R');
-        //     $pdf->Cell(2.2, 0.5, number_format($rowAdeudo["neto"],2), $borde, 0, 'R');
-        //     $y += 0.5;
-        // }
-
-        // $borde = 0;
-        // $y += 0.2;
-        // $pdf->Line(1, $y, 20.5, $y);
-        // $y += 0.2;
-        // $pdf->SetXY(1, $y);
-        // $pdf->SetFont('Arial', 'B', 8.5);
-        // $pdf->SetXY(0.5, $y);
-        // $pdf->Cell(8, 0.5, 'Totales', $borde, 0, 'R');
-        // $pdf->Cell(2, 0.5, number_format($total1,2), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.5, number_format($total2,2), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.5, number_format($total3,2), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.5, number_format($total4,2), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.5, number_format($total5,2), $borde, 0, 'R');
-        // $pdf->Cell(1.6, 0.5, number_format($total6,2), $borde, 0, 'R');
-        // $pdf->Cell(2.2, 0.5, number_format($total7,2), $borde, 0, 'R');
 
        
+      
+        
+       
+        /*if($cuenta->bonEnero > 0){
+            $y+=0.7;
+            $pdf->SetXY(1, $y);
+            $pdf->Cell(19.7, 0.7, utf8_decode('3% Descuento al IMPUESTO PREDIAL '.date("Y").': $'.number_format($cuenta->bonEnero,2)), $borde, 0, 'R');
+            $y+=0.7;
+            $pdf->SetXY(1, $y);
+            $pdf->Cell(19.7, 0.7, utf8_decode('TOTAL A PAGAR: $'.number_format($total,2)), $borde, 0, 'R');
+        }*/
+        $y+=1.4; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, utf8_decode('NOTA: SE APLICA UN DESCUENTO DEL 15% ENERO, 10% FEBRERO Y 5%  MARZO'), $borde, 0, 'R'); //!GARM 20220106 
 
-        // $pdf->SetFont('Arial', '', 11);
-        // $y += 1;
+        $y+=1.4; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, utf8_decode('UN SUBSIDIO DEL 10% SOBRE EL INCREMENTO DEL IMPUESTO PREDIAL Y'), $borde, 0, 'R'); //!GARM 20220106 
 
-       //  $totalLetra = "TOTAL A PAGAR EN VENTANILLA"; // 20211202 garm 
-        //  $totalLetra = "TOTAL A PAGAR EN LINEA"; // 20211202 garm 
-        // if($cuenta->bonEnero > 0){
-        //     $totalLetra = "TOTAL";
-        //     $total = round($total7 - $cuenta->bonEnero,2);
-        // }
-
-        //    $pdf->SetFont('Arial', '', 11); //2021 garm
-        // $y += 1; //2021 garm
- //2021 garm
-        // $totalLetra = "TOTAL A PAGAR EN VENTANILLA"; //2021 garm
-        // if($cuenta->bonEnero > 0){ //2021 garm
-        //     $totalLetra = "TOTAL"; //2021 garm
-        //     $total = round($total9 ,2); //2021 garm
-        // } //2021 garm
-
-
-
-        // $pdf->SetXY(1, $y);
-        // $pdf->Cell(19.7, 0.7, $totalLetra. ": $" . number_format($total7,2), $borde, 0, 'R');
-        // /*if($cuenta->bonEnero > 0){
-        //     $y+=0.7;
-        //     $pdf->SetXY(1, $y);
-        //     $pdf->Cell(19.7, 0.7, utf8_decode('3% Descuento al IMPUESTO PREDIAL '.date("Y").': $'.number_format($cuenta->bonEnero,2)), $borde, 0, 'R');
-        //     $y+=0.7;
-        //     $pdf->SetXY(1, $y);
-        //     $pdf->Cell(19.7, 0.7, utf8_decode('TOTAL A PAGAR: $'.number_format($total,2)), $borde, 0, 'R');
-        // }*/
-
-        // $y+=1.4;
-        // $pdf->SetXY(1, $y);
-        // $pdf->Cell(19.7, 0.7, utf8_decode('NOTA: El importe de la cuenta es válido hasta el día: '. @$cuenta->vence), $borde, 0, 'R');
-
-        // $y = 25;
+        $y+=1.4; 
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, utf8_decode('ADICIONAL UN 5% SOBRE EL IMPUESTO PREDIAL 2022 POR PAGO EN LINEA'), $borde, 0, 'R'); //!GARM 20220106 
 
 
-        // if (is_file($_SERVER["DOCUMENT_ROOT"] . '/slogan1.jpg')) {
-        //     $pdf->Image($_SERVER["DOCUMENT_ROOT"] . '/slogan1.jpg', 12, $y-2, 8);
-        // }
 
-        // $fecha = date("YmdHis");
-        // $archivo ='./tmp/' . md5($expendiente . $fecha) . ".pdf";
-        // $pdf->Output('F', $archivo);
+        $y+=1.4;
+        $pdf->SetXY(1, $y);
+        $pdf->Cell(19.7, 0.7, utf8_decode('NOTA: El importe de la cuenta es válido hasta el día: '. @$cuenta->vence), $borde, 0, 'R');
 
-        // echo asset('tmp/' . md5($expendiente . $fecha) . ".pdf");
+        $y = 24; //24
+       // $y = 25;
+
+
+        if (is_file($_SERVER["DOCUMENT_ROOT"] . '/slogan1.jpg')) {
+            $pdf->Image($_SERVER["DOCUMENT_ROOT"] . '/slogan1.jpg', 12, $y-2, 8);
+        }
+
+        $fecha = date("YmdHis");
+        $archivo ='./tmp/' . md5($expendiente . $fecha) . ".pdf";
+        $pdf->Output('F', $archivo);
+
+        echo asset('tmp/' . md5($expendiente . $fecha) . ".pdf");
     }
 
 }

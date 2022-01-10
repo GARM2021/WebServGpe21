@@ -29,6 +29,13 @@
                                 <td>Colonia</td>
                                 <td>{{ @$info->colubi }}</td>
                             </tr>
+
+                            <tr>
+                                <td>Valor Catastral 20220110</td>
+                              
+                                <td>{{  number_format(@$info->valcat,2) }}</td>
+                            </tr>
+
                         </table>
 
                     </div>
@@ -59,7 +66,7 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">Año Bim</th>
-                                            <th>Concepto</th>
+                                            <th class="text-center">>Concepto</th>
                                             <th class="text-center">Fecha</th>
                                             <th class="text-right">Importe</th>
                                             <th class="text-right">Saldo</th>
