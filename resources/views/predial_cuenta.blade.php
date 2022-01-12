@@ -317,6 +317,14 @@
                                                 <button class="btn btn-info" id="btnAzteca" onclick="imprimirAzteca('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> Imprimir Banco Azteca</button>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th class="text-right">Impresión para pago en HSBC<br><br>
+                                                <img src="{{ asset('logo_hsbc.jpg') }}" style="height: 30px;" alt="Banco HSBC">
+                                            </th>
+                                            <td class="text-right"><br>
+                                                <button class="btn btn-info" id="btnHSBC" onclick="imprimirHSBC('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> Imprimir Banco HSBC</button>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>

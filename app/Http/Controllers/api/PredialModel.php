@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\api\DigitoVerificador\DVOxxo;
 use App\Http\Controllers\api\DigitoVerificador\DVPaynet;
+use App\Http\Controllers\api\DigitoVerificador\DVHsbc;
 use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Illuminate\Database\Console\DumpCommand;
 use Illuminate\Database\Eloquent\Model;
@@ -668,5 +669,104 @@ class PredialModel extends Model
         $dv = new DVOxxo();
         $cv1 = $dv->generar_dv($ref1);
         return $ref1 . $cv1;
+    }
+
+    static function getReferenciaBancoHsbc($expediente, $fecha, $total)
+    {
+        // $issuer = "9901";
+        // if (strlen($expediente) == 8 && substr($expediente, 0, 2) != "28") {
+        //     $expediente = "28" . $expediente;
+        // }
+
+        // if (strlen($expediente) <> 10) {
+        //     return false;
+        // }
+
+    //    $fechaFormato = date("dmY", strtotime($fecha)); //!GARM 20220112
+    //     $fechaFormato = date("Ymd", strtotime($fecha));
+    //     $monto = number_format($total, 2, '.', '');
+    //     $aMonto = explode('.', $monto);
+    //     if (count($aMonto) > 1) {
+    //         $monto = $aMonto[0] . str_pad($aMonto[1], 2, "0", STR_PAD_RIGHT);
+    //     } else {
+    //         $monto = $aMonto[0] . "00";
+    //     }
+
+    //     $monto = str_pad($monto, 7, "0", STR_PAD_LEFT);
+
+    //     $ref1 = $issuer . $expediente . $fechaFormato . $monto;
+
+    $cexp = $expediente;
+    $monto = $total;
+    $cfecha = $fecha;
+    $monto = number_format($monto, 2);
+    // dd($monto);
+    $monto = str_replace(",", "", $monto);
+    $armonto = explode(".", $monto);
+    // dump($armonto);
+    if (count($armonto) > 1) {
+
+      // dump($armonto);
+      $monto = $armonto[0] . str_pad($armonto[1], 2, "0", STR_PAD_RIGHT);
+      // dump($monto);
+    } else {
+      $monto = $monto . ".00";
+    }
+    // dd($monto);
+    //echo "<br>$monto";
+    $monto = str_replace(".", "", $monto);
+    $monto = str_pad($monto, 9, "0", STR_PAD_LEFT);
+
+
+
+    $rexp =  str_pad($cexp, 11, "0", STR_PAD_LEFT);
+
+    dump($rexp);
+
+    $cyear = substr($cfecha, 0, 4);  // abcd
+    $cmes  = substr($cfecha, 4, 2);
+    $cdia  = substr($cfecha, 6, 2);
+
+
+
+    $cfecha = (($cyear - 2013) * 372) + (($cmes - 1) * 31) + ($cdia - 1);
+
+    $mfecha = str_pad($cfecha, 4, "0", STR_PAD_LEFT);
+
+    // dump($cyear);
+    // dump($cmes);
+    // dump($cdia);
+
+    // dump($rexp);
+
+    // dump($mfecha);
+
+
+    // dump($monto);
+
+    // $mmonto = Dv97Model::fmonto97($monto);
+     $dv  = new DVHsbc();
+     $mmonto = $dv->fmonto97($monto);
+    // dump($mmonto);
+
+    $ref1 = $rexp . $mfecha . $mmonto . "8";
+
+    // dump($ref1);
+
+    $digver97 = $dv->fDV97($ref1);
+
+    // $digver97 = DvHsbc::fDV97($ref1);
+
+    $ref1 = $ref1 . $digver97;
+
+
+    dump($ref1);
+
+
+       
+        
+        // $dv = new DVOxxo();
+        // $cv1 = $dv->generar_dv($ref1);
+        // return $ref1 . $cv1;
     }
 }

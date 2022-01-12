@@ -133,3 +133,37 @@ TransitoController.php  cuando es bonificado y descpp pone el mismo valor en amb
                                
                             }
  ==========================================================================================================
+HSBC
+
+ //predial_cuenta.blade.php
+
+ se incluyo 
+
+ Impresion para Pago en HSBC
+
+ //predial_consulta.blade.php
+
+ funcion imprimirHSBC 
+
+ //web.php
+
+ route /predial/hsbc 
+
+ //PredialPDF 
+
+ function hsbc
+
+
+ //Alta en app\Http\Controllers\api\DigitoVerificador
+
+ de Dv97mController.php como DVHsbc.php
+
+ //PredialModel 
+
+ getReferenciaBancoHsbc ($expediente, $fecha, $total)
+
+
+
+
+
+
