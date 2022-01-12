@@ -512,6 +512,7 @@ class PredialModel extends Model
                 $totalAdeudoI = round($totalAdeudoI, 2) + round($netoI, 2);//!GARM 20220102 Se incluye solo para impresion
                 
                 $bonificacionLineaImp =  $totalAdeudoI - $totalAdeudo ;//!GARM 20220102 Se incluye solo para impresion
+                dump("2021011120210111202101112021011120210111202101112021011120210111");
                 dump($neto);
                 dump($netoI);
                 dump($totalAdeudo);

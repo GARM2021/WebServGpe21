@@ -257,7 +257,8 @@ class PredialController extends Controller
     function cuenta()
     {
        dump("PredialController cuenta");
-        $exp = '01001012';
+       // $exp = '01001012';
+        $exp = '0157168012';
         $exp = trim(@$_POST["exp"]);
         if($exp == ""){
             return view('predial_noencontrado');
