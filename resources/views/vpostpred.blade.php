@@ -54,7 +54,8 @@
 
                                     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                         <label class="container_check">Por número de expediente
-                                            <input type="radio" checked="checked" name="buscar" id="bexp" onclick="buscarPor('exp')">
+                                            <input type="radio" checked="checked" name="buscar" id="bexp"
+                                                onclick="buscarPor('exp')">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -73,27 +74,33 @@
                                         <div class="col">
                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                 # Expediente Catastral
-                                                <input type="text" class="form-control forma_busqueda" id="expediente" name="expediente" autocomplete="false">
+                                                <input type="text" class="form-control forma_busqueda" id="expediente"
+                                                    name="expediente" autocomplete="false">
                                             </div>
 
 
-                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center" style="padding: 10px;">
+                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center"
+                                                style="padding: 10px;">
                                                 <small style="margin-top: 20px;">EJEMPLO. 01001001<br>
                                                     (Región-Manzana-Lote)</small>
                                             </div>
 
                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  text-center">
                                                 <!-- en caso de desactivar el pago en linea, se desactiva el siguiente boton -->
-                                                <button type="text" class="btn btnBuscar" onclick="consultar()" id="btnConsultar">Consultar</button>
+                                                <button type="text" class="btn btnBuscar" onclick="consultar()"
+                                                    id="btnConsultar">Consultar</button>
                                             </div>
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-weight: 200; font-style: italic;">
-                                                * Puedes obtener el número de expediente revisando en un recibo de pago anterior
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                                style="font-weight: 200; font-style: italic;">
+                                                * Puedes obtener el número de expediente revisando en un recibo de pago
+                                                anterior
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_buscar_direccion" style="display: none;">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_buscar_direccion"
+                                        style="display: none;">
                                         <div class="col">
                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                 Calle y número
@@ -108,7 +115,8 @@
 
                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
                                                 <!-- en caso de desactivar el pago en linea, se desactiva el siguiente boton -->
-                                                <button type="text" class="btn btnBuscar" onclick="buscarDireccion()" id="btnDireccion">Consultar</button>
+                                                <button type="text" class="btn btnBuscar" onclick="buscarDireccion()"
+                                                    id="btnDireccion">Consultar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -131,17 +139,19 @@
                     <div class="col-lg-12" style="height: 50px;">&nbsp;</div>
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
                     <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12" style="font-size: 16px;">
-                        @if(date("n") <= 3)
+                        @if (date('n') <= 3)
                             <b>Paga en ventanilla virtual o en tiendas de conveniencia y Oxxo</b>
-                            <p>y ahorra hasta un {{ env('DESCUENTO') }}% en el pago de impuesto predial 2021 Pagando en el mes de enero</p>
-                            <p><small>Aplica solo para contribuyente que cumplieron con el pago de sus contribuciones al 31 de diciembre 2020</small></p>
+                            <p>y ahorra hasta un {{ env('DESCUENTO') }}% en el pago de impuesto predial 2021 Pagando en el
+                                mes de enero</p>
+                            <p><small>Aplica solo para contribuyente que cumplieron con el pago de sus contribuciones al 31
+                                    de diciembre 2020</small></p>
                         @endif
 
                         La transacción es fácil y segura. Al finalizar podrás descargar tu recibo de pago virtual.<br>
                         Aceptamos tarjetas de crédito y débito visa y master card.
                     </div>
                     <div class="col-lg-4 col-md-2 col-sm-12 col-xs-12">
-                        <img src="{{ asset("tmpl/visa.jpg") }}" style="width: 100%; max-width: 350px;" alt="">
+                        <img src="{{ asset('tmpl/visa.jpg') }}" style="width: 100%; max-width: 350px;" alt="">
                     </div>
 
                 </div>
@@ -152,12 +162,18 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('tmpl/swal/sweetalert2.min.css') }}">
     <style>
-        .tablaCuenta.table-condensed > tbody > tr > td, .tablaCuenta.table-condensed > tbody > tr > th, .tablaCuenta.table-condensed > tfoot > tr > td, .tablaCuenta.table-condensed > tfoot > tr > th, .tablaCuenta.table-condensed > thead > tr > td, .tablaCuenta.table-condensed > thead > tr > th {
+        .tablaCuenta.table-condensed>tbody>tr>td,
+        .tablaCuenta.table-condensed>tbody>tr>th,
+        .tablaCuenta.table-condensed>tfoot>tr>td,
+        .tablaCuenta.table-condensed>tfoot>tr>th,
+        .tablaCuenta.table-condensed>thead>tr>td,
+        .tablaCuenta.table-condensed>thead>tr>th {
             border-top: 1px solid #F5F5F5;
             font-size: 13px;
             color: #333;
             padding: 5px;
         }
+
     </style>
 @endsection
 @section('scripts')
@@ -165,6 +181,11 @@
     <script type="text/javascript">
         function consultar() {
             let exp = jQuery("#expediente").val();
+
+
+
+
+
             if (exp == "") {
                 Swal.fire({
                     icon: 'warning',
@@ -175,17 +196,26 @@
             } else {
                 jQuery("#btnConsultar").html('Espere un momento...');
                 jQuery("#btnConsultar").prop("disabled", true);
+                jQuery("#btnHSBC").html('Ambiente prueba 01001012');
                 $.ajax({
                     type: "POST",
                     url: "{{ asset('predial/consulta') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "exp": exp},
-                    success: function (data) {
+                        "exp": exp
+                    },
+                    success: function(data) {
                         jQuery("#btnConsultar").html('Consultar');
                         jQuery("#btnConsultar").prop("disabled", false);
                         jQuery("#div_contenido").html(data);
-                    }, error: function () {
+
+                        if (exp == "01001012") {
+                            alert("entro");
+                            jQuery("#btnHSBC").html('Ambiente prueba 01001012');
+                            jQuery("#btnHSBC").prop("disabled", false);
+                        }
+                    },
+                    error: function() {
                         Swal.fire({
                             icon: 'error',
                             text: 'Lo sentimos, ha ocurrido un error, favor de intentarlo mas tarde'
@@ -208,25 +238,27 @@
 
                 return;
             } else {
-                jQuery("#btnConsultar"+exp).html('Espere un momento...');
+                jQuery("#btnConsultar" + exp).html('Espere un momento...');
                 jQuery(".btnConsultar").prop("disabled", true);
                 $.ajax({
                     type: "POST",
                     url: "{{ asset('predial/consulta') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "exp": exp},
-                    success: function (data) {
-                        jQuery("#btnConsultar"+exp).html(exp);
+                        "exp": exp
+                    },
+                    success: function(data) {
+                        jQuery("#btnConsultar" + exp).html(exp);
                         jQuery(".btnConsultar").prop("disabled", false);
                         jQuery("#div_contenido").html(data);
-                    }, error: function () {
+                    },
+                    error: function() {
                         Swal.fire({
                             icon: 'error',
                             text: 'Lo sentimos, ha ocurrido un error, favor de intentarlo mas tarde'
                         });
 
-                        jQuery("#btnConsultar"+exp).html(exp);
+                        jQuery("#btnConsultar" + exp).html(exp);
                         jQuery(".btnConsultar").prop("disabled", false);
                     }
                 });
@@ -252,12 +284,15 @@
                     url: "{{ asset('predial/direccion') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "domicilio": calle, "colonia": colonia},
-                    success: function (data) {
+                        "domicilio": calle,
+                        "colonia": colonia
+                    },
+                    success: function(data) {
                         jQuery("#btnDireccion").html('Consultar');
                         jQuery("#btnDireccion").prop("disabled", false);
                         jQuery("#div_contenido").html(data);
-                    }, error: function () {
+                    },
+                    error: function() {
                         Swal.fire({
                             icon: 'error',
                             text: 'Lo sentimos, ha ocurrido un error, favor de intentarlo mas tarde'
@@ -281,8 +316,9 @@
                     url: "{{ asset('predial/imprimir') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "expediente": exp},
-                    success: function (data) {
+                        "expediente": exp
+                    },
+                    success: function(data) {
                         jQuery("#btnImprimir").html('<i class="notika-icon notika-print"></i> Imprimir');
                         jQuery("#btnImprimir").prop("disabled", false);
                         if (data != "ERROR") {
@@ -303,19 +339,20 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ asset('predial/paynet') }}",
-                    data: 
-                    {
+                    data: {
                         "_token": "{{ csrf_token() }}",
-                        "expediente": exp},
-                    success: function (data) {
+                        "expediente": exp
+                    },
+                    success: function(data) {
                         jQuery("#btnPaynet").html('<i class="notika-icon notika-print"></i> Imprimir Paynet');
                         jQuery("#btnPaynet").prop("disabled", false);
                         if (data != "ERROR") {
                             window.open(data);
                         }
                     },
-                    error: (function () {
-                        jQuery("#btnPaynet").html('<i class="notika-icon notika-print"></i> Imprimir Paynet');
+                    error: (function() {
+                        jQuery("#btnPaynet").html(
+                            '<i class="notika-icon notika-print"></i> Imprimir Paynet');
                         jQuery("#btnPaynet").prop("disabled", false);
                         Swal.fire({
                             icon: 'warning',
@@ -338,15 +375,16 @@
                     url: "{{ asset('predial/oxxo') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "expediente": exp},
-                    success: function (data) {
+                        "expediente": exp
+                    },
+                    success: function(data) {
                         jQuery("#btnOxxo").html('<i class="notika-icon notika-print"></i> Imprimir OXXO');
                         jQuery("#btnOxxo").prop("disabled", false);
                         if (data != "ERROR") {
                             window.open(data);
                         }
                     },
-                    error: (function () {
+                    error: (function() {
                         jQuery("#btnOxxo").html('<i class="notika-icon notika-print"></i> Imprimir OXXO');
                         jQuery("#btnOxxo").prop("disabled", false);
                         Swal.fire({
@@ -370,16 +408,19 @@
                     url: "{{ asset('predial/azteca') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "expediente": exp},
-                    success: function (data) {
-                        jQuery("#btnAzteca").html('<i class="notika-icon notika-print"></i> Imprimir Banco Azteca');
+                        "expediente": exp
+                    },
+                    success: function(data) {
+                        jQuery("#btnAzteca").html(
+                            '<i class="notika-icon notika-print"></i> Imprimir Banco Azteca');
                         jQuery("#btnAzteca").prop("disabled", false);
                         if (data != "ERROR") {
                             window.open(data);
                         }
                     },
-                    error: (function () {
-                        jQuery("#btnAzteca").html('<i class="notika-icon notika-print"></i> Imprimir Banco Azteca');
+                    error: (function() {
+                        jQuery("#btnAzteca").html(
+                            '<i class="notika-icon notika-print"></i> Imprimir Banco Azteca');
                         jQuery("#btnAzteca").prop("disabled", false);
                         Swal.fire({
                             icon: 'warning',
@@ -401,6 +442,5 @@
 
             }
         }
-
     </script>
 @endsection

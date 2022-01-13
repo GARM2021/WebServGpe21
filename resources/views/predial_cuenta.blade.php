@@ -322,7 +322,7 @@
                                                 <img src="{{ asset('logo_hsbc.jpg') }}" style="height: 30px;" alt="Banco HSBC">
                                             </th>
                                             <td class="text-right"><br>
-                                                <button class="btn btn-info" id="btnHSBC" onclick="imprimirHSBC('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> Imprimir Banco HSBC</button>
+                                                <button class="btn btn-info" id="btnHSBC" onclick="imprimirHSBC('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> En mantenimiento</button>
                                             </td>
                                         </tr>
                                     </table>

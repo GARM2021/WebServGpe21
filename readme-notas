@@ -164,6 +164,42 @@ HSBC
 
 
 
+//predial_consulta.blade y vpostpred.blade 
+else {
+                jQuery("#btnConsultar").html('Espere un momento...');
+                jQuery("#btnConsultar").prop("disabled", true);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ asset('predial/consulta') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "exp": exp},
+                    success: function (data) {
+                        jQuery("#btnConsultar").html('Consultar');
+                        jQuery("#btnConsultar").prop("disabled", false);
+                        jQuery("#div_contenido").html(data);
+                        if (exp == "01001012") {
+                jQuery("#btnHSBC").html('Ambiente prueba 01001012');
+                jQuery("#btnHSBC").prop("disabled", false);
+                }
+                    }, error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Lo sentimos, ha ocurrido un error, favor de intentarlo mas tarde'
+                        });
+
+                        jQuery("#btnConsultar").html('Consultar');
+                        jQuery("#btnConsultar").prop("disabled", false);
+                    }
+                });
+            }
 
 
+           
 
+                jQuery("#btnHSBC").prop("disabled", true);
+
+             if (exp == "01001012") {
+                jQuery("#btnHSBC").html('Ambiente prueba 01001012');
+                jQuery("#btnHSBC").prop("disabled", false);
+             }

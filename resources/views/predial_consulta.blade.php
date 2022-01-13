@@ -133,8 +133,8 @@
                     <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12" style="font-size: 16px;">
                         @if(date("n") <= 3)
                             <b>Paga en ventanilla virtual o en tiendas de conveniencia y Oxxo</b>
-                            <p>y ahorra hasta un {{ env('DESCUENTO') }}% en el pago de impuesto predial 2021 Pagando en el mes de enero</p>
-                            <p><small>Aplica solo para contribuyente que cumplieron con el pago de sus contribuciones al 31 de diciembre 2020</small></p>
+                            <p>y ahorra hasta un {{ env('DESCUENTO') }}% adicional en el pago de impuesto predial 2022 Pagando en el mes de enero</p>
+                            <p><small> </small></p>
                         @endif
 
                         La transacción es fácil y segura. Al finalizar podrás descargar tu recibo de pago virtual.<br>
