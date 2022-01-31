@@ -11,12 +11,12 @@ class Dv97mController extends Controller
 {
   function fpaso0()
   {
-
+    dump("Dv97mController");
     // $cexp  = '01001012';
     // $monto = 4420.90;
     // $cfecha = '20220131';
-    $cexp = '00005031001';
-    $monto = '1232.40';
+    $cexp = '00001001001';
+    $monto = '1.10';
     $cfecha = '20220131';
 
 
@@ -34,7 +34,7 @@ class Dv97mController extends Controller
     } else {
       $monto = $monto . ".00";
     }
-    // dd($monto);
+     //dd($monto);
     //echo "<br>$monto";
     $monto = str_replace(".", "", $monto);
     $monto = str_pad($monto, 9, "0", STR_PAD_LEFT);
@@ -63,11 +63,12 @@ class Dv97mController extends Controller
 
     dump($mfecha);
 
-
+    dump("antes de fmonto97");
     dump($monto);
 
     $mmonto = Dv97Model::fmonto97($monto);
 
+    dump("despues de fmonto97");
     dump($mmonto);
 
     $ref1 = $rexp . $mfecha . $mmonto . "8";

@@ -10,7 +10,7 @@ class Dv97Model extends Model
 {
     static function fmonto97($monto)
     {
-        dump("Dv97Model.fmonto97");
+      dump("Dv97Model.fmonto97");
         $suma = 0;
 
         $amonto = str_split($monto);
@@ -48,7 +48,7 @@ class Dv97Model extends Model
         dump($amonto);
 
 
-
+        
         $suma += $amonto[16]  * 11;
         $suma += $amonto[15]  * 13;
         $suma += $amonto[14]  * 17;
@@ -73,6 +73,13 @@ class Dv97Model extends Model
 
         $resto  = ($suma % 97) + 1;
 
+        dump("resto");
+        dump($resto);
+
+        $sresto =  str_pad($resto, 2, "0", STR_PAD_LEFT);
+        
         return $resto;
+
+       
     }
 }

@@ -432,6 +432,41 @@
             }
         }
 
+       
+        function imprimirHSBC(exp) {
+            if (exp == "") {
+                return;
+            } else {
+                jQuery("#btnHSBC").html('<i class="notika-icon notika-print"></i> Espere un momento...');
+                jQuery("#btnHSBC").prop("disabled", true);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ asset('predial/hsbc') }}",
+                    data: {"expediente": exp},
+                    success: function (data) {
+                        jQuery("#btnHSBC").html('<i class="notika-icon notika-print"></i> Imprimir Banco HSBC');
+                        jQuery("#btnHSBC").prop("disabled", false);
+                        if (data != "ERROR") {
+                            window.open(data);
+                        }
+                    },
+                    error: (function () {
+                        jQuery("#btnHSBC").html('<i class="notika-icon notika-print"></i> Imprimir Banco HSBC');
+                        jQuery("#btnHSBC").prop("disabled", false);
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Error',
+                            text: 'Algo ha salido mal, favor de intentarlo mas tarde, o favor de comunicarse con tesoreria municipal',
+                        });
+                    })
+                })
+            }
+        }
+
+
+
+        
+
         function buscarPor(tipo) {
             if (tipo == 'exp') {
                 jQuery("#div_buscar_expediente").css("display", "");

@@ -199,7 +199,8 @@ else {
 
                 jQuery("#btnHSBC").prop("disabled", true);
 
-             if (exp == "01001012") {
-                jQuery("#btnHSBC").html('Ambiente prueba 01001012');
-                jQuery("#btnHSBC").prop("disabled", false);
+          
              }
+
+ -------------------------------------------------------------
+             

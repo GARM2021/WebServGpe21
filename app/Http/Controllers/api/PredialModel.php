@@ -379,7 +379,7 @@ class PredialModel extends Model
                  * 13 Mayo 2020 se toman las bonificaciones primero de la tabla preddadeudos, si esta en 0 se toma lo de la tabla de bondbonpred
                  */
 
-                if($rowAdeudos->impbon > 0)
+                if($rowAdeudos->impbon > 0) // este se cancelo en el de enlinea 20221114 
                 {
                     /* && !$esComercio && $esBaldio*/
                     if($tipoCargo == '002'){
@@ -747,7 +747,8 @@ class PredialModel extends Model
     // $mmonto = Dv97Model::fmonto97($monto);
      $dv  = new DVHsbc();
      $mmonto = $dv->fmonto97($monto);
-    // dump($mmonto);
+     dump("PredialModel");
+     dump($mmonto);
 
     $ref1 = $rexp . $mfecha . $mmonto . "8";
 

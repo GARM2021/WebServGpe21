@@ -165,3 +165,31 @@ protected void B_INGING22_Click(object sender, EventArgs e)
 
         }
     }
+
+ string  ctafolio = "00000000000000";
+ string  cuenta = "00000000";
+ string  caja = "0806";
+ string  estatus = "0000";
+ string  fun = "50";
+ string  fpago = "20220113";
+ string  ofipago = "0801";
+ string  fcancont = "        ";
+ int  numunico = 0;
+ double  indiceini = "0";
+ double  indicefin = "0";
+ string  yearindini = "      ";
+ string  yearindfin	 = "     ";
+ string refban	= " ";
+ string USUCAPBON	= " ";
+ string FDESCAR	 = " ";
+ int DEVEN	= 0;
+
+ string exp = "14";	
+ string yearbim	= spasol[01];
+ double montoimp	= spasol[01];
+ double bonif	= spasol[01];
+ string recibo	= spasol[01];
+ string region	= spasol[01];
+ string regman	= spasol[01];
+ double subsidio= spasol[01];	
+
