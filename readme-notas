@@ -194,13 +194,44 @@ else {
                 });
             }
 
-
-           
-
                 jQuery("#btnHSBC").prop("disabled", true);
-
           
              }
 
  -------------------------------------------------------------
-             
+  20220209
+  
+  Se incluyo en defaultb.controler unas lineas de un insert para preddpagos
+  que se incluyeron el en el defaultb que corre en el 29 
+
+  aqui solo para poderlo editar 
+
+  -------------------------------------------------------------
+  ===========================================================================================================
+--- Para Debuguear STORE PROCEDURE 04:35 p. m. 03/11/2021
+
+1- Se inserta una instruccion SELECT
+
+	SELECT @nombreVariable    
+
+2- Se Ejecuta el ALTER PROCEDURE del store procedure
+
+
+3- Se corre el EXEC en otra pantalla de Query
+
+
+  EXEC dbo.SP_eshabita "72001012      " 
+===========================================================================================================
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11:41 a. m. 14/03/2022
+proceso para subir una aplicacion
+
+recuerda siempre guardar tu aplicacion en D>aplicaciones y ahi subir tus archivos
+
+1.abrir IIS
+2.abrir la carpeta web sites y despues seleccionar el mundo donde estan todos los web sites
+3. dar click derecho en el mundo y seleccionar nuevo>virtual directory
+4.darle un nombre para buscarlo en la web
+5.seleccionar la ruta de la aplicacion de tu archivo de aplicaciones
+6. darle permisos y listo ya esta creado
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

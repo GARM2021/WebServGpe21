@@ -73,6 +73,7 @@ class PredialModel extends Model
         $query = DB::connection('sqlsrv')
             ->table('preddexped')
             ->where('exp', '=', trim($expediente))
+            ->where('cvebaja', '=', '  ') // ! GARM 20220225 
             ->first();
 
         return $query;
@@ -294,10 +295,33 @@ class PredialModel extends Model
                     ->where('fecfin', '>=', $hoy)
                     ->where('estatus', '=', '0')
                     ->first();
-
+                     /*======================================================================================*/
+                                          //! Ejecuta STORE PROCEDURE   
+                     /*======================================================================================*/
                     dump($queryBonificacion);
+   
+                    // $nrecibo = DB::connection('sqlsrv')->select('EXEC SP_NewRecOf ?', [$expediente]);  
+                    
+                    //   dump("$nrecibo");
+                    //   dump($nrecibo); 
+
                     $eshabita = DB::connection('sqlsrv')->select('EXEC SP_eshabita ?', [$expediente]);//20211103  funciona    
-                    dump($eshabita);
+                   dump($eshabita);
+
+                   // echo    $eshabita;
+
+                     /*======================================================================================*/
+                                          //! Ejecuta STORE PROCEDURE                                                             
+                     /*======================================================================================*/
+                    /*======================================================================================*/
+                      //! SET NOCOUNT ON 
+                      //!The problem is that the stored procedure returns a result containing the number of rows
+                      //!affected as the first result.                                                             
+                    /*======================================================================================*/
+                   $nrecibo = DB::connection('sqlsrv')->select('EXEC SP_NewRecOf ?', [$expediente]);
+                    
+                   dump("nrecibo");
+                   dump($nrecibo);
                 /* HDT 06/01/2021 Se busca en la BDD si es comercio */
                 /*$esComercio = DB::connection($connection)
                     ->table("predmtpoconst")

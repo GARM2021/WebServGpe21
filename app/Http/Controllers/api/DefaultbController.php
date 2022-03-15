@@ -840,3 +840,68 @@ class DefaultbController extends Controller
              
   
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+ // <!-- INSERT DEL PAGO preddpagos-->    // GARM 20220209 080500075244 INSERT COMPACTADO    
+// $sqlIns = "INSERT INTO preddpagos ( exp,  ctafolio,  cuenta,  yearbim,  montoimp,  bonif,  recargos,  bonrec,  tpocar,  caja, recibo, estatus, fun, fpago, ofipago,  region,  regman,  subsidio,  fcancont,  numunico,  indiceini,  indicefin,  yearindini, refban,  yearindfin)  VALUES ( ";  
+						 
+
+
+
+//  $sqlIns = "INSERT INTO preddpagos (";
+//  $sqlIns.= "exp,"; 
+//  $sqlIns.= "ctafolio,"; 
+//  $sqlIns.= "cuenta,"; 
+//  $sqlIns.= "yearbim,"; 
+//  $sqlIns.= "montoimp,"; 
+//  $sqlIns.= "bonif,"; 
+//  $sqlIns.= "recargos,"; 
+//  $sqlIns.= "bonrec,"; 
+//  $sqlIns.= "tpocar,"; 
+//  $sqlIns.= "caja,"; 
+//  $sqlIns.= "recibo,"; 
+//  $sqlIns.= "estatus,"; 
+//  $sqlIns.= "fun,"; 
+//  $sqlIns.= "fpago,"; 
+//  $sqlIns.= "ofipago,"; 
+//  $sqlIns.= "region,"; 
+//  $sqlIns.= "regman,"; 
+//  $sqlIns.= "subsidio,"; 
+//  $sqlIns.= "fcancont,"; 
+//  $sqlIns.= "numunico,"; 
+//  $sqlIns.= "indiceini,"; 
+//  $sqlIns.= "indicefin,"; 
+//  $sqlIns.= "yearindini,";
+//  $sqlIns.= "refban,"; 
+//  $sqlIns.= "yearindfin)"; 
+ 
+//  $sqlIns.= "VALUES (";          
+//  $sqlIns.= "'".$Expe."',"; 
+//  $sqlIns.= "'".'00000000000000'."',";
+//  $sqlIns.= "'".'00000000'."',"; 
+//  $sqlIns.= "'".$wyearbim."',"; 
+//  $sqlIns.= "$WimpNETO,"; 
+//  $sqlIns.= "$pbonimp,"; 
+//  $sqlIns.= "$wrecargos,"; 
+//  $sqlIns.= "$bonrec,"; 
+//  $sqlIns.= "'".$tpocar."',"; 
+//  $sqlIns.= "'".$wcaja."',"; 
+//  $sqlIns.= "'".$wfoliorec."',"; 
+//  $sqlIns.= "'".'0000'."',"; 
+//  $sqlIns.= "'".$wfun."',"; 
+//  $sqlIns.= "'".$hoy."',"; 
+//  $sqlIns.= "'".$wofipago."',"; 
+//  $sqlIns.= "'".$Region."',"; 
+//  $sqlIns.= "'".$RegionManz."',"; 
+//  $sqlIns.= "$salsub,"; 
+//  $sqlIns.= "' ',"; 
+//  $sqlIns.= "0,"; 
+//  $sqlIns.= "0,"; 
+//  $sqlIns.= "0,"; 
+//  $sqlIns.= "' ',"; 
+//  $sqlIns.= "'".$noperacion."',";       
+//  $sqlIns.= "' ')"; 
+
