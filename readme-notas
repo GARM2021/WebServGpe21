@@ -235,3 +235,169 @@ recuerda siempre guardar tu aplicacion en D>aplicaciones y ahi subir tus archivo
 5.seleccionar la ruta de la aplicacion de tu archivo de aplicaciones
 6. darle permisos y listo ya esta creado
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ejemplo de EJECUTAR STORE PROCEDURE en PHP_ROUND_HALF_UP
+
+CREATE PROCEDURE usp_normal
+	@clase VARCHAR(2)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT id, nombre FROM alumnos WHERE clase=@clase;
+END
+
+
+<?php
+
+print "<h1>SQL Query non PDO</h1>";
+print "<h2>Connection</h2>";
+$connectionInfo = array( "Database"=>$sql_database, "UID"=>$sql_username, "PWD"=>$sql_password );
+$conn = sqlsrv_connect( $sql_server, $connectionInfo);
+
+if( $conn === false ) {
+     die( print_r( sqlsrv_errors(), true));
+} else {
+    print "Good DB Connection: $conn<br>";
+}
+
+print "<h2>Query Example 1 | Fetching by Associate Array</h2>";
+$sql = "SELECT username, active FROM users WHERE username = '$username'";
+print "SQL: $sql\n";
+$result = sqlsrv_query($conn, $sql);
+if($result === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+#Fetching Data by array
+while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+    print_r($row);
+}
+
+print_line();
+print "<h2>Query Example 2 | injection protection | Fetching by Object</h2>";
+$sql = "SELECT username, active FROM users WHERE username = ?";
+print "SQL: $sql\n";
+$result = sqlsrv_query($conn, $sql, array($username));
+if($result === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+#Fetching Data by object
+while($row = sqlsrv_fetch_object($result)) {
+    print_r($row);
+}
+
+--------------------------------------------------
+Result
+
+Connection
+Good DB Connection: Resource id #2
+Query Example 1 | Fetching by Associate Array
+SQL: SELECT username, active FROM users WHERE username = 'admin'
+Array
+(
+    [username] => admin
+    [active] => 1
+)
+######################################################################
+Query Example 2 | injection protection | Fetching by Object
+SQL: SELECT username, active FROM users WHERE username = ?
+stdClass Object
+(
+    [username] => admin
+    [active] => 1
+)
+
+<?php
+   
+$sqlpru = "EXEC SP_NewRecOf ?";
+
+$result = sqlsrv_query( $con, $sqlpru, array($Exp));
+
+
+?>
+
+
+//Configuracion de la conexion a base de datos LOCAL
+$bd_host = "207.248.62.188";  //ip del web
+//$bd_host = "192.10.228.10"; 
+
+//$bd_host = "64.22.119.64"; 
+
+$bd_usuario = "tesoreria"; 
+$bd_password = "#tecinf2017"; 
+
+//$bd_usuario = "sa_pago_predial"; 
+//$bd_password = "InfoWeb2013"; 
+
+$bd_base = "gpe".trim(date("Y"));
+
+$con = mssql_connect($bd_host, $bd_usuario, $bd_password) or die('no se puede conectar a SQL Server'); 
+mssql_select_db($bd_base,$con); 
+?>
+
+////////////////////////////////
+20220407
+En predial_cuenta.blade esta el post al web service de adquiramexico 
+
+manda 
+name="s_transm" value="{{ $cuenta->comorder_id }}">
+name="c_referencia" value="{{ trim($info->exp) }}">
+
+20220504>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+VERSION XAMPP : 5.6.40 2019-03-08
+COMPOSER 1.8.4 2019-02-11
+-------------------------------------------------------------------------------------------------
+D:\xampp\htdocs\WebServGpe21>php artisan -V
+Laravel Framework 8.51.0
+composer show
+composer show -t
+composer help
+D:\xampp\htdocs\WebServGpe21>composer -V
+Composer version 2.0.11 2021-02-24 14:57:23
+------------------------------------------------------------------------------
+XAMPP
+Se bajo el xampp de la version de 5.6.40 
+de 
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/  
+
+- se instalo
+- se modifico 
+- el PATH en SISTEMA - Configuraciones Avanzadas del sistema - Variables de entorno - Variables del Sistema - app_path
+----------------------------------------------------------------------------------------------------
+COMPOSER 
+primero se bajo el 
+composer.phar 
+de: https://getcomposer.org/downlad/
+"1.8.4  2019999-02-11"
+se bajo el instalador de 
+https://getcomposer.org/installer
+lo baja como:
+installer
+se copio a 
+C:\xampp5_6_40\htdocs\WS_GPE_5640
+se renombro como 
+composer-setup.php 
+y se ejecuto 
+
+C:\xampp5_6_40\htdocs\WS_GPE_5640>php composer-setup.php --filename=<composer.phar 
+>composer --V 
+----------------------------------------------------------------------------------------------------
+Version de laravel
+en xampp\htdocs\WebServGpe21\composer.json
+en el servidor 
+"laravel/framework": "5.4.*",
+----------------------------------------------------------------------------------------------------
+Laravel
+se installo con :
+
+c:\xamp5_6_40\htdocs>composer create-project laravel/laravel WSGPE5640 "5.4.*"
+
+
+
+http://www.thecodingjack.com/how-to-use-fpdf-in-your-laravel-app/
+
+
+composer require codedge/laravel-fpdf
+

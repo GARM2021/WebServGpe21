@@ -318,8 +318,8 @@ class PredialModel extends Model
                       //!The problem is that the stored procedure returns a result containing the number of rows
                       //!affected as the first result.                                                             
                     /*======================================================================================*/
-                   $nrecibo = DB::connection('sqlsrv')->select('EXEC SP_NewRecOf ?', [$expediente]);
-                    
+                 //  $nrecibo = DB::connection('sqlsrv')->select('EXEC SP_NewRecOf ?', [$expediente]);
+                   $nrecibo = DB::connection('sqlsrv')->select('EXEC SP_NewRecOf ');                    
                    dump("nrecibo");
                    dump($nrecibo);
                 /* HDT 06/01/2021 Se busca en la BDD si es comercio */
