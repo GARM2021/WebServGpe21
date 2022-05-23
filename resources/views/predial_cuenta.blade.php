@@ -318,11 +318,19 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th class="text-right">Impresión para pago en HSBC<br><br>
+                                            <th class="text-right">Impresión para pago en HSBC<br><br> 
                                                 <img src="{{ asset('logo_hsbc.jpg') }}" style="height: 30px;" alt="Banco HSBC">
                                             </th>
                                             <td class="text-right"><br>
                                                 <button class="btn btn-info" id="btnHSBC" onclick="imprimirHSBC('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> En mantenimiento</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-right">Impresión para pago en BBVA20220523<br><br> 
+                                                <img src="{{ asset('logo_bbva.jpg') }}" style="height: 30px;" alt="Banco BBVA">
+                                            </th>
+                                            <td class="text-right"><br>
+                                                <button class="btn btn-info" id="btnBBVA onclick="imprimirBBVA('{{ trim($info->exp2) }}')"><i class="notika-icon notika-print"></i> En mantenimiento</button>
                                             </td>
                                         </tr>
                                     </table>

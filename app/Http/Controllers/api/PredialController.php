@@ -281,9 +281,14 @@ class PredialController extends Controller
 
         $cuenta = PredialModel::getEstadoCuenta($exp);
 
+        $exp2 = trim($info->exp) . "2"; //!20220523 BBVA
         $datos = [];
         $datos["info"] = $info;
         $datos["cuenta"] = $cuenta;
+        $datos["exp2"] = $exp2;
+        dump("20220523");
+        dump($exp2);
+        
       
         return view('predial_cuenta', $datos);
     }

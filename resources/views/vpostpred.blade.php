@@ -196,7 +196,7 @@
             } else {
                 jQuery("#btnConsultar").html('Espere un momento...');
                 jQuery("#btnConsultar").prop("disabled", true);
-                jQuery("#btnHSBC").html('Ambiente prueba 01001012');
+                jQuery("#btnBBVA").html('Ambiente prueba 01001012');
                 $.ajax({
                     type: "POST",
                     url: "{{ asset('predial/consulta') }}",
@@ -211,8 +211,8 @@
 
                         if (exp == "01001012") {
                             alert("entro");
-                            jQuery("#btnHSBC").html('Ambiente prueba 01001012');
-                            jQuery("#btnHSBC").prop("disabled", false);
+                            jQuery("#btnBBVA").html('Ambiente prueba 01001012');
+                            jQuery("#btnBBVA").prop("disabled", false);
                         }
                     },
                     error: function() {
@@ -462,6 +462,37 @@
                 })
             }
         }
+
+
+        function imprimirBBVA(exp) {
+            if (exp == "") {
+                return;
+            } else {
+                jQuery("#btnBBVA").html('<i class="notika-icon notika-print"></i> Espere un momento...');
+                jQuery("#btnBBVA").prop("disabled", true);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ asset('predial/bbva') }}",
+                    data: {"expediente": exp},
+                    success: function (data) {
+                        jQuery("#btnBBVA").html('<i class="notika-icon notika-print"></i> Imprimir Banco BBVA');
+                        jQuery("#btnBBVA").prop("disabled", false);
+                        if (data != "ERROR") {
+                            window.open(data);
+                        }
+                    },
+                    error: (function () {
+                        jQuery("#btnBBVA").html('<i class="notika-icon notika-print"></i> Imprimir Banco BBVA');
+                        jQuery("#btnBBVA").prop("disabled", false);
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Error',
+                            text: 'Algo ha salido mal, favor de intentarlo mas tarde, o favor de comunicarse con tesoreria municipal',
+                        });
+                    })
+                })
+            }
+        } 
 
 
 

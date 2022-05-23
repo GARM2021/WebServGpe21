@@ -50,6 +50,8 @@ Route::post('/predial/oxxo', 'api\PredialPDF@oxxo');
 Route::post('/predial/azteca', 'api\PredialPDF@azteca');
 //GARM 2022012
 Route::post('/predial/hsbc', [App\Http\Controllers\api\PredialPDF::class, 'hsbc']);
+//GARM 20220523
+Route::post('/predial/bbva', [App\Http\Controllers\api\PredialPDF::class, 'bbva']);
 
 
 Route::post('/presupuestos/usuarios_actualizarcuentas', 'api\PresupuestosController@usuarios_actualizarcuentas');
