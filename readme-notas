@@ -344,7 +344,7 @@ name="c_referencia" value="{{ trim($info->exp) }}">
 
 20220504>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+defuse encryption library ??
 
 VERSION XAMPP : 5.6.40 2019-03-08
 COMPOSER 1.8.4 2019-02-11
@@ -386,8 +386,10 @@ C:\xampp5_6_40\htdocs\WS_GPE_5640>php composer-setup.php --filename=<composer.ph
 ----------------------------------------------------------------------------------------------------
 Version de laravel
 en xampp\htdocs\WebServGpe21\composer.json
-en el servidor 
+en el servidor <<<<<<<
 "laravel/framework": "5.4.*",
+https://www.guadalupe.gob.mx/info.php
+PHP version 5.6.40
 ----------------------------------------------------------------------------------------------------
 Laravel
 se installo con :
@@ -400,4 +402,15 @@ http://www.thecodingjack.com/how-to-use-fpdf-in-your-laravel-app/
 
 
 composer require codedge/laravel-fpdf
+
+-------------------------------------------------------------------------------------------------
+20220523 BBVA 
+
+predial_cuenta.blade.php  define btnBBVA  En mantenimiento disabled <<--OjO
+predial_consulta.blade.php function consultar () function imprimirBBVA(exp) 
+web.php   Route::post('/predial/bbva', 'api\PredialPDF@bbva');
+
+PredialPDF.php   public function bbva()  -> getReferenciaBancoHsbc($expediente, $fecha, $total) incluir constante28 (2)
+PredialModel.php     static function getReferenciaBancoHsbc($expediente, $fecha, $total) -> DVHsbc fmonto97-con constante28 (2)
+                
 

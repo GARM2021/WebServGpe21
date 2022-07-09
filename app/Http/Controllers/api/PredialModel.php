@@ -697,29 +697,6 @@ class PredialModel extends Model
 
     static function getReferenciaBancoHsbc($expediente, $fecha, $total)
     {
-        // $issuer = "9901";
-        // if (strlen($expediente) == 8 && substr($expediente, 0, 2) != "28") {
-        //     $expediente = "28" . $expediente;
-        // }
-
-        // if (strlen($expediente) <> 10) {
-        //     return false;
-        // }
-
-    //    $fechaFormato = date("dmY", strtotime($fecha)); //!GARM 20220112
-    //     $fechaFormato = date("Ymd", strtotime($fecha));
-    //     $monto = number_format($total, 2, '.', '');
-    //     $aMonto = explode('.', $monto);
-    //     if (count($aMonto) > 1) {
-    //         $monto = $aMonto[0] . str_pad($aMonto[1], 2, "0", STR_PAD_RIGHT);
-    //     } else {
-    //         $monto = $aMonto[0] . "00";
-    //     }
-
-    //     $monto = str_pad($monto, 7, "0", STR_PAD_LEFT);
-
-    //     $ref1 = $issuer . $expediente . $fechaFormato . $monto;
-
     $cexp = $expediente;
     $monto = $total;
     $cfecha = $fecha;

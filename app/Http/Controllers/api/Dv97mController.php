@@ -71,7 +71,7 @@ class Dv97mController extends Controller
     dump("despues de fmonto97");
     dump($mmonto);
 
-    $ref1 = $rexp . $mfecha . $mmonto . "8";
+    $ref1 = $rexp . $mfecha . $mmonto . "8"; //!20220523 EL OCHO PASARLO COMO PARAMETRO 8 O 2 
 
     dump($ref1);
 

@@ -1,4 +1,8 @@
+LOCAL == xampp PHP 8.0.2 -> artisan>> Laravel Laravel Framework 8.51.0 -> composer >> 2.0.011
+SERVIDOR xampp PHP 5.6.40-> artisan>> Laravel Laravel Framework 5.4 -> composer >> 2.0.011
 
+
+https://www.guadalupe.gob.mx/info.php
 
 
 VERSION XAMPP : 5.6.40 2019-03-08
@@ -11,6 +15,8 @@ VERSION XAMPP : 5.6.40 2019-03-08
 PHP 5.6.40
 SQL DRIVER : sqlsrv_56_ts_x64
 
+
+ 
 
 
 

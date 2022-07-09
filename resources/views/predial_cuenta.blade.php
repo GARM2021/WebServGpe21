@@ -330,7 +330,7 @@
                                                 <img src="{{ asset('logo_bbva.jpg') }}" style="height: 30px;" alt="Banco BBVA">
                                             </th>
                                             <td class="text-right"><br>
-                                                <button class="btn btn-info" id="btnBBVA onclick="imprimirBBVA('{{ trim($info->exp2) }}')"><i class="notika-icon notika-print"></i> En mantenimiento</button>
+                                                <button class="btn btn-info" id="btnBBVA onclick="imprimirBBVA('{{ trim($info->exp) }}')"><i class="notika-icon notika-print"></i> En mantenimiento</button>
                                             </td>
                                         </tr>
                                     </table>

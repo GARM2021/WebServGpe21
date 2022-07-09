@@ -1,5 +1,4 @@
-<?php
-  /**
+<?php   /**
    *  Implementacion de algoritmo AES
    *  @author: Mercadotecnia, Ideas y Tecnologia
    *  @date  : 2014
@@ -15,7 +14,8 @@
    *  ?>
    *  </code>
    */
-
+ 
+  
 
     class AESEncriptacion{
       public static function encriptar($plaintext, $key128)
@@ -64,3 +64,9 @@
       }
     }
 ?>
+
+?>
+
+
+
+
