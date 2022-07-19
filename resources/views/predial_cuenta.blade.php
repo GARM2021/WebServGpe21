@@ -1,3 +1,9 @@
+
+
+
+  
+    
+
 <div class="row" id="div_contenido">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="breadcomb-list">
@@ -263,9 +269,9 @@
                             con tu tarjeta de crédito o débito visa o masterd card.</h3><br>
                         <img src="{{ asset("tmpl/visa.jpg") }}" style="width: 100%; max-width: 220px;" alt="">
                         <br><br>
-                        <form method="post" action="https://www.adquiramexico.com.mx/clb/endpoint/gGuadalupe">
+                        <form id='FormPagoLinea' method="post" action="https://www.adquiramexico.com.mx/clb/endpoint/gGuadalupe">
                             <input type="hidden" name="s_transm" value="{{ $cuenta->comorder_id }}">
-                            <input type="hidden" name="c_referencia" value="{{ trim($info->exp) }}">
+                            <input id="ic_referencia" type="hidden" name="c_referencia" value="{{ trim($info->exp) }}">
                             <input type="hidden" name="val_1" value="0">
                             <input type="hidden" name="t_servicio" value="002">
                             <input type="hidden" name="t_importe" value="<?php echo number_format(@$rowAdeudo["totalAdeudo"], 2, '.', '')?>">
@@ -276,7 +282,7 @@
                             <input type="hidden" name="val_6" value="0">
                             <input type="hidden" name="val_11" value="">
                             <input type="hidden" name="val_12" value="">
-                            <button class="btn btn-info" id="btnPagarLinea">PAGO EN LINEA &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right" style="color: #eea236"></i></button>
+                            <button class="btn btn-info" id="btnPagarLinea">PAGO EN LINEA prueba &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right" style="color: #eea236"></i></button>
                         </form>
                         <br><br><br>
                     </div>
@@ -345,6 +351,27 @@
 
             </div>
         </div>
+        
     @endif
 
+
 </div>
+<script src="{{ asset('tmpl/swal/sweetalert2.all.min.js') }}"></script>
+<script type="text/javascript"> //20220719  C24
+    document.getElementById('btnPagarLinea').addEventListener('click',(e) => {
+      e.preventDefault();
+      console.log("este es ");
+      console.log(e); 
+          
+       formulario.setAttribute('action', 'https://www.adquiramexico.com.mx/clb/endpoint/gGuadalupe')
+        
+      if(document.getElementById('ic_referencia').value == '01001012') {
+        FormPagoLinea.setAttribute('action', 'https://prepro.adquiracloud.mx/clb/endpoint/gGuadalupe')
+       //confirm("es 01001012");
+       console.log("es 01001012 y no trece");}
+      
+      document.getElementById('FormPagoLinea').submit();
+    });
+    
+    </script>
+
