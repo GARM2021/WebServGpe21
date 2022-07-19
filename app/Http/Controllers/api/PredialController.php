@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
 
+
 class PredialController extends Controller
 {
     function descargarpdf()
@@ -257,6 +258,9 @@ class PredialController extends Controller
     function cuenta()
     {
        dump("PredialController cuenta");
+        $key = "66ECC7589D572910692B2F809C94CADF";
+        $textoOriginal = "0100101220220711GABRIEL";
+      //  $sencriptado = AESEncriptacion::encriptar($textoOriginal, $key);
         $exp = '01001012';
       //  $exp = '0157168012';
         $exp = trim(@$_POST["exp"]);
