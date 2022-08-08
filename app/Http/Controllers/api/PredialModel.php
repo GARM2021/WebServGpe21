@@ -604,6 +604,9 @@ class PredialModel extends Model
 
             $response->bonEnero = $bonEnero;
             $response->comorder_id = trim(substr(trim($expediente) . $yearBimOrder, 0, 32));
+            $comorder_paso = trim(substr(trim($expediente) . $yearBimOrder, 0, 32)); //!C25 
+            dump("comorder_id");
+            dump($comorder_paso);
         }
 
        

@@ -109,10 +109,15 @@ class DefaultbController extends Controller
 		// 	$val_13		 = $_POST["val_13"];  							// HMAC SHA-1
 		// 	$numtc       = 'XXXXXXXXXX'.substr($_POST["val_9"],0,4);	// Numero de tarjeta 	
 		// 	$Expe		 = $_POST["c_referencia"]; 
+       $Expe = '01001012';
+		if (trim($Expe)  == "01001012") {
+         
 
-
+			# code...
+		
+		
 		// //Inserta en una tabla de transacciones. predmwebTransaction toda la informacion proveeida por el banco. para ver si la aprobo o no.
-		// 	$sqlIns  ="Insert into predmwebTransaction ([Expe],[s_transm],[referencia],[val_1_nivelDetalle],[t_servicio],[t_importe]";
+		// 	$sqlIns  ="Insert into predmwebTransactionp ([Expe],[s_transm],[referencia],[val_1_nivelDetalle],[t_servicio],[t_importe]";
 		//     $sqlIns.= ",[val_3_moneda],[t_pago],[n_autoriz],[val_9_numtc],[val_10_fpagp],[val_5_financiamiento]";
 		//     $sqlIns.= ",[val_6_periodoFinan],[val_11_email],[val_12_Telefono],[fecha],[val_13_Sha1]) ";	
 		// 	$sqlIns.= "VALUES (";          
@@ -135,6 +140,9 @@ class DefaultbController extends Controller
 		// 	$sqlIns.= "'".$val_13."')";	
 		// 	//echo $sqlIns;
 		// 	mssql_query($sqlIns,$con);
+	} else {
+		# code...
+	}
 
         	$wreferencua = "01001012    ";
 
