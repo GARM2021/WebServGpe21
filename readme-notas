@@ -15,43 +15,7 @@ extension=php_sqlsrv.dll
 
 - en el archivo .env se incluyo
 
-BSQL_CONNECTION=sqlsrv
-DBSQL_HOST=207.248.62.188
-DBSQL_PORT=1433
-DBSQL_DATABASE=gpe2021
-DBSQL_USERNAME=sa
-DBSQL_PASSWORD=Gu4d4Lup317
 
-DBMULTRAN_CONNECTION=multrannl
-DBMULTRAN_HOST=207.248.62.188
-DBMULTRAN_PORT=1433
-DBMULTRAN_DATABASE=MULTRANNL
-DBMULTRAN_USERNAME=sa
-DBMULTRAN_PASSWORD=Gu4d4Lup317
-
-- ..\config\database.php
-
- 'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DBSQL_HOST', 'localhost'),
-            'port' => env('DBSQL_PORT', '1433'),
-            'database' => env('DBSQL_DATABASE', 'forge'),
-            'username' => env('DBSQL_USERNAME', 'forge'),
-            'password' => env('DBSQL_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-        ],
-
-        'multrannl' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DBMULTRAN_HOST', 'localhost'),
-            'port' => env('DBMULTRAN_PORT', '1433'),
-            'database' => env('DBMULTRAN_DATABASE', 'forge'),
-            'username' => env('DBMULTRAN_USERNAME', 'forge'),
-            'password' => env('DBMULTRAN_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-        ],
 
 
 TransitoController.procesaPago original 
@@ -317,13 +281,13 @@ $result = sqlsrv_query( $con, $sqlpru, array($Exp));
 
 
 //Configuracion de la conexion a base de datos LOCAL
-$bd_host = "207.248.62.188";  //ip del web
+$bd_host = "";  //ip del web
 //$bd_host = "192.10.228.10"; 
 
 //$bd_host = "64.22.119.64"; 
 
-$bd_usuario = "tesoreria"; 
-$bd_password = "#tecinf2017"; 
+$bd_usuario = ""; 
+$bd_password = ""; 
 
 //$bd_usuario = "sa_pago_predial"; 
 //$bd_password = "InfoWeb2013"; 
@@ -413,4 +377,19 @@ web.php   Route::post('/predial/bbva', 'api\PredialPDF@bbva');
 PredialPDF.php   public function bbva()  -> getReferenciaBancoHsbc($expediente, $fecha, $total) incluir constante28 (2)
 PredialModel.php     static function getReferenciaBancoHsbc($expediente, $fecha, $total) -> DVHsbc fmonto97-con constante28 (2)
                 
+===================================================================================================================
+20220824 
 
+https://stackoverflow.com/questions/18022809/how-to-solve-error-mysql-shutdown-unexpectedly
+
+Instead, first try using the MySQL backup folder which is included with XAMPP. So do next steps:
+
+Rename folder mysql/data to mysql/data_old
+Make a copy of mysql/backup folder and name it as mysql/data
+Copy all your database folders from mysql/data_old into mysql/data (except mysql, performance_schema, and phpmyadmin folders)
+Copy mysql/data_old/ibdata1 file into mysql/data folder
+Start MySQL from XAMPP control panel
+And, voilà!
+
+
+===================================================================================================================
