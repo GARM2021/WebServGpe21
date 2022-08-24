@@ -285,7 +285,7 @@ $result = sqlsrv_query( $con, $sqlpru, array($Exp));
 $bd_host = "";  //ip del web
 //$bd_host = "192.10.228.10"; 
 
-//$bd_host = "64.22.119.64"; 
+//$bd_host = ""; 
 
 $bd_usuario = ""; 
 $bd_password = ""; 
