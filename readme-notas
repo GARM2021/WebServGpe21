@@ -291,7 +291,7 @@ $bd_usuario = "";
 $bd_password = ""; 
 
 //$bd_usuario = "sa_pago_predial"; 
-//$bd_password = "InfoWeb2013"; 
+//$bd_password = ""; 
 
 $bd_base = "gpe".trim(date("Y"));
 
